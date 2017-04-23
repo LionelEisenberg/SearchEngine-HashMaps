@@ -23,7 +23,7 @@ public final class Words {
         // The regular expression splits strings on whitespace and non-letter
         // characters (anything except [a-zA-Z]). Far from perfect, but close
         // enough for this simple program.
-        Pattern pattern = Pattern.compile("[\\s[^0-9    a-zA-Z]]+");
+        Pattern pattern = Pattern.compile("[\\s[^0-9a-zA-Z]]+");
         Map<String, Integer> data = new TreapMap<>();
 
         // If you're wondering why we're not using Scanner instead, you're
