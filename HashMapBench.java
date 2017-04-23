@@ -4,44 +4,44 @@ import java.util.*;
 
 public final class HashMapBench {
     private static final int SIZE = 200;
-    private static final int STRINGSIZE = 10;
+    private static final int STRINGSIZE = 5;
     private static String allPossible = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static Random random = new Random();
     private HashMapBench() {}
 
         //insert helper method.
-        private static void insert(Map<String, String> m, String[] data) {
+        private static void insert(HashMap m, String[] data) {
             for (Integer i = 0; i < SIZE; i++) {
                 m.insert(data[i], data[i]);
             }
         }
 
         //remove helper method
-        private static void remove(Map<String, String> m, String[] data) {
+        private static void remove(HashMap m, String[] data) {
             for (Integer i = 0; i < SIZE; i++) {
                 m.remove(data[i]);
             }
         }
 
         //find helper method.
-        private static void lookup(Map<String, String> m, String[] data) {
+        private static void lookup(HashMap m, String[] data) {
             for (Integer i = 0; i < SIZE; i++) {
                 boolean x = m.has(data[i]);
             }
         }
 
-        private static void put(Map<String, String> m, String[] data) {
+        private static void put(HashMap m, String[] data) {
             for (Integer i = 0; i < SIZE; i++) {
-                 m.put(data[i], data[i]);
+                m.put(data[i], data[i]);
             }
         }
 
         //helper function to make a random string of length argument.
-        private String randomString(int length) {
+        private static String randomString(int length) {
             StringBuilder s = new StringBuilder(length);
-            for( int i = 0; i < len; i++ ) {
+            for( int i = 0; i < SIZE; i++ ) {
                 s.append(allPossible.charAt(random.nextInt
-                    (allPossible.length())));
+                (allPossible.length())));
             }
             return s.toString();
         }
@@ -56,7 +56,7 @@ public final class HashMapBench {
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
                 }
-                Map<Integer, Integer> m = new HashMap<>();
+                HashMap m = new HashMap();
                 b.start();
                 insert(m, data);
             }
@@ -71,9 +71,10 @@ public final class HashMapBench {
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
                 }
-                Map<Integer, Integer> m = new HashMap<>();
-                b.start();
+                HashMap m = new HashMap();
                 insert(m, data);
+                b.start();
+                lookup(m, data);
             }
         }
 
@@ -86,7 +87,7 @@ public final class HashMapBench {
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
                 }
-                Map<Integer, Integer> m = new HashMap<>();
+                HashMap m = new HashMap();
                 b.start();
                 remove(m, data);
             }
@@ -101,11 +102,10 @@ public final class HashMapBench {
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
                 }
-                Map<Integer, Integer> m = new HashMap<>();
+                HashMap m = new HashMap();
                 insert(m, data);
                 b.start();
-                lookup(m, data);
+                put(m, data);
             }
         }
     }
-}
