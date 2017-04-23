@@ -11,8 +11,19 @@
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.lang.reflect.Array;
 
 public class HashMap implements Map<String, String> {
+
+    public static void main (String[] args) {
+        HashMap map = new HashMap();
+        System.out.println(map.size());
+        map.insert("USA", "English");
+        map.insert("France", "French");
+        map.insert("India", "Hindi");
+        map.insert("India", "Marathi");
+        System.out.println(map);
+    }
 
     private LinkedList<String>[] chain;
     private int size;  //refers to number of key-value pairs
@@ -22,7 +33,8 @@ public class HashMap implements Map<String, String> {
      */
 
     public HashMap () {
-        this.chain = (LinkedList<String>[]) new Object[10000]; //default size
+        this.size = 0;
+        this.chain = (LinkedList<String>[]) Array.newInstance(LinkedList.class, 10000); //default
     }
 
     /**
@@ -30,7 +42,8 @@ public class HashMap implements Map<String, String> {
      */
 
     public HashMap (int s) {
-        this.chain = (LinkedList<String>[]) new Object[s]; //user specified size
+        this.size = 0;
+        this.chain = (LinkedList<String>[]) Array.newInstance(LinkedList.class, s); //user specified size
     }
 
     private int hashFunction(String k) {
@@ -44,9 +57,6 @@ public class HashMap implements Map<String, String> {
         }
         int hashCode = this.hashFunction(k);
         LinkedList<String> values = this.chain[hashCode % this.chain.length];
-        if (values == null || values.size() == 0) {
-            throw new IllegalArgumentException();
-        }
         return values;
     }
 
@@ -65,7 +75,8 @@ public class HashMap implements Map<String, String> {
         int hashCode = hashFunction(k);
         LinkedList<String> target = this.chain[hashCode % this.chain.length];
         if (target == null) {
-            target = new LinkedList<String>();
+            this.chain[hashCode % this.chain.length] = new LinkedList<String>();
+            target = this.chain[hashCode % this.chain.length];
         }
         target.add(v);
         this.size++;
@@ -81,12 +92,15 @@ public class HashMap implements Map<String, String> {
 
     public String remove(String k) throws IllegalArgumentException {
         LinkedList<String> values = this.find(k);
+        if (values == null) {
+            return "";
+        }
         String output = "";
         for (String s : values) {
             output += s;
             output += " ";
         }
-        values = null; //removes it from map
+        this.chain[this.hashFunction(k) % this.chain.length] = null; //removes it from map
         this.size--;
         return output;
     }
@@ -101,6 +115,9 @@ public class HashMap implements Map<String, String> {
 
     public void put(String k, String v) throws IllegalArgumentException {
         LinkedList<String> values = this.find(k);
+        if (values == null) {
+            throw new IllegalArgumentException();
+        }
         values.clear();
         String[] toMap = v.split(" ");
         for (int i = 0; i < toMap.length; i++) {
@@ -119,6 +136,9 @@ public class HashMap implements Map<String, String> {
     public String get(String k) throws IllegalArgumentException {
         LinkedList<String> values = find(k);
         String output = "";
+        if (values == null) {
+            return "";
+        }
         for (String v : values) {
             output += v;
             output += " ";
@@ -168,5 +188,20 @@ public class HashMap implements Map<String, String> {
         }
         return keys.iterator();
     }
+
+    /**
+     * String representation of HashMap
+     * @return s string of hashedkey: value
+     */
+
+     public String toString() {
+         String out = "";
+         for (int i = 0; i < this.chain.length; i++) {
+             if (this.chain[i] != null) {
+                 out += i + ": " + this.chain[i] + "\n";
+             }
+         }
+         return out;
+     }
 
  }
