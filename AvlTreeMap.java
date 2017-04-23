@@ -15,7 +15,7 @@ import java.util.ArrayList;
 * @param <V> Type for values.
 */
 public class AvlTreeMap<K extends Comparable<? super K>, V>
-implements OrderedMap<K, V> {
+implements Map<K, V> {
     public static final int UNBALANCE = 2; //Maximum difference between subtrees
 
     // Inner AvlNode class, each holds a key (which is what we sort the
@@ -339,7 +339,7 @@ implements OrderedMap<K, V> {
 
     public boolean isBalanced(AvlNode n) {
         if (n == null) {
-            n == this.root;
+            n = this.root;
         }
         boolean rightIsBalanced = true;
         boolean leftIsBalanced = true;
