@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.regex.Pattern;
 import java.util.Scanner;
 import java.util.LinkedList;
+import java.util.TreeSet;
 import java.util.Set;
 import java.util.Stack;
 
@@ -21,7 +22,7 @@ public class JHUgle {
 
     String url;
     int i = 0;
-    Map<String, String> hashmap = new Map<>();
+    Map<String, String> hashmap = new HashMap<>();
     while ((url = reader.readLine()) != null) {
       String keyWords = reader.readLine();
       String[] words = pattern.split(keyWords);
@@ -34,24 +35,21 @@ public class JHUgle {
   }
 
   public void GetInputQuery(Map<String, String> hashmap) {
-    Pattern pattern = Pattern.compile("[\\s[^0-9a-zA-Z]]+");
-
     Scanner kb = new Scanner(System.in);
-    Stack<String> rpnStack = new ArrayStack<>();
+    Stack<String> rpnStack = new Stack<>();
     while (kb.hasNext()) {
       String next = kb.next(); //get next input from User
       rpnStack.push(next);
       if (rpnStack.peek().compareTo("!") == 0) {
         break; //break out of loop and exit if the input is "!"
       }
-      if (rpnStack.peek().compareTo("&&")) {
-        rpnStack.pop();
+      if (rpnStack.peek().compareTo("&&") == 0) {
         String key1 = rpnStack.pop();
         String key2 = rpnStack.pop();
         //concatenate & pop back on top of stack
       }
-      if (rpnStack.peek().compareTo("||")) {
-        ArraySet<String> arrayS = new ArraySet<>();
+      if (rpnStack.peek().compareTo("||") == 0) {
+        Set<String> treeS = new TreeSet<>();
         String oredKeyToPopBack;
 
         rpnStack.pop();
@@ -59,19 +57,17 @@ public class JHUgle {
         String key2 = rpnStack.pop();
         String key1result = hashmap.get(key1);
         String key2result = hashmap.get(key2);
-        InputStreamReader input = new InputStreamReader(key1result);
-        BufferedReader reader = new BufferedReader(input);
-        String[] urls = pattern.split(reader);
+
+        String[] urls = key1result.split(" ");
         for (String url : urls) {
-          arrayS.add(url);
+          treeS.add(url);
         }
-        input = new InputStreamReader(key2result);
-        reader = new BufferedReader(input);
-        urls = pattern.split(reader);
+
+        urls = key2result.split(" ");
         for (String url : urls) {
-          arrayS.add(url);
+          treeS.add(url);
         }
-        for (String result : arrayS) {
+        for (String result : treeS) {
           oredKeyToPopBack += result;
         }
         rpnStack.push(oredKeyToPopBack);
