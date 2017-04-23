@@ -4,12 +4,14 @@ main file for JHUgle.
 */
 
 import java.io.*;
+import java.util.EmptyStackException;
 import java.util.regex.Pattern;
 import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.TreeSet;
 import java.util.Set;
 import java.util.Stack;
+import java.lang.Exception;
 
 
 public class JHUgle {
@@ -25,11 +27,9 @@ public class JHUgle {
         }
 
         Pattern pattern = Pattern.compile("[\\s[^0-9a-zA-Z]]+");
-        InputStreamReader input = new InputStreamReader(System.in);
-        BufferedReader reader = new BufferedReader(input);
 
         int i = 0;
-        while (inFile.hasNext()) {
+        while (inFile.hasNext()) { //get each input in file
             String url = inFile.nextLine();
             String keyWords = inFile.nextLine();
             String[] words = pattern.split(keyWords);
@@ -37,6 +37,7 @@ public class JHUgle {
                 hashmap.insert(word, url);
             }
         }
+        System.out.println("Index created");
 
         GetInputQuery(hashmap);
     }
@@ -44,44 +45,73 @@ public class JHUgle {
     private static void GetInputQuery(HashMap hashmap) {
         Scanner kb = new Scanner(System.in);
         Stack<String> rpnStack = new Stack<>();
+        System.out.print("> ");
         while (kb.hasNext()) {
+            System.out.print("> ");
             String next = kb.next(); //get next input from User
             if (next.compareTo("!") == 0) {
                 break; //break out of loop and exit if the input is "!"
             } else if (next.compareTo("&&") == 0) {
-                String key1 = rpnStack.pop();
-                String key2 = rpnStack.pop();
-                //concatenate & pop back on top of stack
+                LinkedList<String> listV = new LinkedList<>();
+                String oredKeyToPopBack = "";
+                try {
+                    String key1 = rpnStack.pop();
+                    String key2 = rpnStack.pop();
+                    String[] urls = key1.split(" ");
+                    String[] urls2 = key2.split(" ");
+
+                    for (String url : urls) {
+                        for (String url2 : urls2) {
+                            if (url.compareTo(url2) == 0) {
+                                listV.add(url);
+                            }
+                        }
+                    }
+                    for (String result : listV) {
+                        oredKeyToPopBack += result + " ";
+                    }
+                    rpnStack.push(oredKeyToPopBack);
+                } catch (EmptyStackException e) {
+                    System.err.println("Stack to empty to and!");
+                }
             } else if (next.compareTo("||") == 0) {
                 Set<String> treeS = new TreeSet<>();
                 String oredKeyToPopBack = "";
+                try {
+                    String key1 = rpnStack.pop();
+                    String key2 = rpnStack.pop();
 
-                String key1 = rpnStack.pop();
-                String key2 = rpnStack.pop();
+                    String[] urls = key1.split(" ");
+                    for (String url : urls) {
+                        treeS.add(url);
+                    }
 
-                String[] urls = key1.split(" ");
-                for (String url : urls) {
-                    treeS.add(url);
+                    urls = key2.split(" ");
+                    for (String url : urls) {
+                        treeS.add(url);
+                    }
+                    for (String result : treeS) {
+                        oredKeyToPopBack += result + " ";
+                    }
+                    rpnStack.push(oredKeyToPopBack);
+                } catch (EmptyStackException e) {
+                    System.err.println("Stack to empty to or!");
                 }
-
-                urls = key2.split(" ");
-                for (String url : urls) {
-                    treeS.add(url);
-                }
-                for (String result : treeS) {
-                    oredKeyToPopBack += result + " ";
-                }
-                rpnStack.push(oredKeyToPopBack);
             } else if (next.compareTo("?") == 0) {
-                String[] values = rpnStack.peek().split(" ");
-                for (String value : values) {
-                    System.out.println(value);
+                try {
+                    String[] values = rpnStack.peek().split(" ");
+                    for (String value : values) {
+                        System.out.println(value);
+                    }
+                } catch (EmptyStackException e) {
+                    System.err.println("Stack is empty");
                 }
             } else {
                 if (hashmap.has(next)) {
                     rpnStack.push(hashmap.get(next));
                 } else {
-                    System.out.println("Cannot Be found in database");
+                    System.out.println("Cannot Be found in database or this" +
+                    "command is not recognised, please try again.");
                 }
             }
         }
