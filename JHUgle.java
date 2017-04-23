@@ -3,9 +3,7 @@ Lionel Eisenberg (leisenb5) & Sanat Deshpande (sdeshpa4)
 main file for JHUgle.
 */
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.regex.Pattern;
 import java.util.Scanner;
 import java.util.LinkedList;
@@ -15,26 +13,35 @@ import java.util.Stack;
 
 
 public class JHUgle {
+    private static HashMap hashmap = new HashMap();
+
     public static void main(String[] args) throws IOException {
+        Scanner inFile;
+        if (0 < args.length) {
+            inFile = new Scanner(new File(args[0]));
+        } else {
+            System.out.println("Error, wrong command line arguments");
+            return;
+        }
+
         Pattern pattern = Pattern.compile("[\\s[^0-9a-zA-Z]]+");
         InputStreamReader input = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(input);
 
-        String url;
         int i = 0;
-        Map<String, String> hashmap = new HashMap<>();
-        while ((url = reader.readLine()) != null) {
-            String keyWords = reader.readLine();
+        while (inFile.hasNext()) {
+            String url = inFile.nextLine();
+            String keyWords = inFile.nextLine();
             String[] words = pattern.split(keyWords);
             for (String word : words) {
-                //map.insert(word, url);
+                hashmap.insert(word, url);
             }
         }
 
         GetInputQuery(hashmap);
     }
 
-    public void GetInputQuery(Map<String, String> hashmap) {
+    private static void GetInputQuery(HashMap hashmap) {
         Scanner kb = new Scanner(System.in);
         Stack<String> rpnStack = new Stack<>();
         while (kb.hasNext()) {
@@ -50,7 +57,7 @@ public class JHUgle {
             }
             if (rpnStack.peek().compareTo("||") == 0) {
                 Set<String> treeS = new TreeSet<>();
-                String oredKeyToPopBack;
+                String oredKeyToPopBack = "";
 
                 rpnStack.pop();
                 String key1 = rpnStack.pop();

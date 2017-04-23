@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.lang.reflect.Array;
 
+
 public class HashMap implements Map<String, String> {
 
     public static void main (String[] args) {
@@ -56,7 +57,9 @@ public class HashMap implements Map<String, String> {
             throw new IllegalArgumentException();
         }
         int hashCode = this.hashFunction(k);
-        LinkedList<String> values = this.chain[hashCode % this.chain.length];
+        int mod = (hashCode % this.chain.length + this.chain.length)
+            % this.chain.length;
+        LinkedList<String> values = this.chain[mod];
         return values;
     }
 
@@ -73,10 +76,12 @@ public class HashMap implements Map<String, String> {
             throw new IllegalArgumentException();
         }
         int hashCode = hashFunction(k);
-        LinkedList<String> target = this.chain[hashCode % this.chain.length];
+        int mod = (hashCode % this.chain.length + this.chain.length)
+            % this.chain.length;
+        LinkedList<String> target = this.chain[mod];
         if (target == null) {
-            this.chain[hashCode % this.chain.length] = new LinkedList<String>();
-            target = this.chain[hashCode % this.chain.length];
+            this.chain[mod] = new LinkedList<String>();
+            target = this.chain[mod];
         }
         target.add(v);
         this.size++;
@@ -100,7 +105,9 @@ public class HashMap implements Map<String, String> {
             output += s;
             output += " ";
         }
-        this.chain[this.hashFunction(k) % this.chain.length] = null; //removes it from map
+        int mod = (this.hashFunction(k) % this.chain.length + this.chain.length)
+            % this.chain.length;
+        this.chain[mod] = null; //removes it from map
         this.size--;
         return output;
     }
