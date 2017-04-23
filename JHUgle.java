@@ -46,41 +46,43 @@ public class JHUgle {
         Stack<String> rpnStack = new Stack<>();
         while (kb.hasNext()) {
             String next = kb.next(); //get next input from User
-            rpnStack.push(next);
-            if (rpnStack.peek().compareTo("!") == 0) {
+            if (next.compareTo("!") == 0) {
                 break; //break out of loop and exit if the input is "!"
-            }
-            if (rpnStack.peek().compareTo("&&") == 0) {
+            } else if (next.compareTo("&&") == 0) {
                 String key1 = rpnStack.pop();
                 String key2 = rpnStack.pop();
                 //concatenate & pop back on top of stack
-            }
-            if (rpnStack.peek().compareTo("||") == 0) {
+            } else if (next.compareTo("||") == 0) {
                 Set<String> treeS = new TreeSet<>();
                 String oredKeyToPopBack = "";
 
-                rpnStack.pop();
                 String key1 = rpnStack.pop();
                 String key2 = rpnStack.pop();
-                String key1result = hashmap.get(key1);
-                String key2result = hashmap.get(key2);
 
-                String[] urls = key1result.split(" ");
+                String[] urls = key1.split(" ");
                 for (String url : urls) {
                     treeS.add(url);
                 }
 
-                urls = key2result.split(" ");
+                urls = key2.split(" ");
                 for (String url : urls) {
                     treeS.add(url);
                 }
                 for (String result : treeS) {
-                    oredKeyToPopBack += result;
+                    oredKeyToPopBack += result + " ";
                 }
                 rpnStack.push(oredKeyToPopBack);
-            } else if (rpnStack.peek().compareTo("?") == 0) {
-                rpnStack.pop();
-                System.out.println(hashmap.get(rpnStack.pop()));
+            } else if (next.compareTo("?") == 0) {
+                String[] values = rpnStack.peek().split(" ");
+                for (String value : values) {
+                    System.out.println(value);
+                }
+            } else {
+                if (hashmap.has(next)) {
+                    rpnStack.push(hashmap.get(next));
+                } else {
+                    System.out.println("Cannot Be found in database");
+                }
             }
         }
     }

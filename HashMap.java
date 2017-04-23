@@ -163,6 +163,9 @@ public class HashMap implements Map<String, String> {
     public boolean has(String k) {
         try {
             LinkedList<String> values = this.find(k); //throws error if no match
+            if (values == null) {
+                return false;
+            }
             return true;
         } catch (IllegalArgumentException e) {
             return false;
