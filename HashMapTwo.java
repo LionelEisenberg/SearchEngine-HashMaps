@@ -17,7 +17,7 @@ import java.lang.reflect.Array;
 public class HashMapTwo<K, V> implements Map<K, V> {
 
     public static void main (String[] args) {
-        HashMapTwo<String, ArrayList<String>> map = new HashMapTwo<>();
+        HashMapTwo<String, ArrayList<String>> map = new HashMapTwo<>(3);
         //System.out.println(map.size());
         ArrayList<String> list = new ArrayList<>();
         list.add("English");
@@ -122,6 +122,7 @@ public class HashMapTwo<K, V> implements Map<K, V> {
                 this.chain[mod] = new Node(k, v);
                 return;
             }
+            mod = (mod + this.probe(probeCount)) % this.chain.length; //moves on to next slot
             probeCount++;
             index++;
         }
