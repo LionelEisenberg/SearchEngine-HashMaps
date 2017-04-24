@@ -14,9 +14,9 @@ import java.util.Iterator;
 import java.lang.reflect.Array;
 
 
-public class HashMap implements Map<String, String> {
+public class HashMap<K, V> implements Map<K, V> {
 
-    public static void main (String[] args) {
+    /*public static void main (String[] args) {
         HashMap map = new HashMap();
         System.out.println(map.size());
         map.insert("USA", "English");
@@ -24,9 +24,9 @@ public class HashMap implements Map<String, String> {
         map.insert("India", "Hindi");
         map.insert("India", "Marathi");
         System.out.println(map);
-    }
+    }*/
 
-    private LinkedList<String>[] chain;
+    private LinkedList<V>[] chain;
     private int size;  //refers to number of key-value pairs
 
     /**
@@ -35,7 +35,7 @@ public class HashMap implements Map<String, String> {
 
     public HashMap () {
         this.size = 0;
-        this.chain = (LinkedList<String>[]) Array.newInstance(LinkedList.class, 10000); //default
+        this.chain = (LinkedList<V>[]) Array.newInstance(LinkedList.class, 10000); //default
     }
 
     /**
@@ -44,22 +44,21 @@ public class HashMap implements Map<String, String> {
 
     public HashMap (int s) {
         this.size = 0;
-        this.chain = (LinkedList<String>[]) Array.newInstance(LinkedList.class, s); //user specified size
+        this.chain = (LinkedList<V>[]) Array.newInstance(LinkedList.class, s); //user specified size
     }
 
-    private int hashFunction(String k) {
-        String key = k; //casts generic type to string
-        return key.hashCode(); //returns hashcode
+    private int hashFunction(K k) {
+        return k.hashCode(); //returns hashcode
     }
 
-    private LinkedList<String> find (String k) throws IllegalArgumentException {
+    private LinkedList<V> find (K k) throws IllegalArgumentException {
         if (k == null) {
             throw new IllegalArgumentException();
         }
         int hashCode = this.hashFunction(k);
         int mod = (hashCode % this.chain.length + this.chain.length)
             % this.chain.length;
-        LinkedList<String> values = this.chain[mod];
+        LinkedList<V> values = this.chain[mod];
         return values;
     }
 
@@ -71,16 +70,16 @@ public class HashMap implements Map<String, String> {
      * @throws IllegalArgumentException If k is null.
      */
 
-    public void insert(String k, String v) throws IllegalArgumentException {
+    public void insert(K k, V v) throws IllegalArgumentException {
         if (k == null) {
             throw new IllegalArgumentException();
         }
-        int hashCode = hashFunction(k);
+        int hashCode = this.hashFunction(k);
         int mod = (hashCode % this.chain.length + this.chain.length)
             % this.chain.length;
-        LinkedList<String> target = this.chain[mod];
+        LinkedList<V> target = this.chain[mod];
         if (target == null) {
-            this.chain[mod] = new LinkedList<String>();
+            this.chain[mod] = new LinkedList<V>();
             target = this.chain[mod];
         }
         target.add(v);
@@ -95,13 +94,13 @@ public class HashMap implements Map<String, String> {
      * @throws IllegalArgumentException If k is null or not mapped.
      */
 
-    public String remove(String k) throws IllegalArgumentException {
-        LinkedList<String> values = this.find(k);
+    public String remove(K k) throws IllegalArgumentException {
+        LinkedList<V> values = this.find(k);
         if (values == null) {
             return "";
         }
         String output = "";
-        for (String s : values) {
+        for (V s : values) {
             output += s;
             output += " ";
         }
@@ -120,16 +119,13 @@ public class HashMap implements Map<String, String> {
      * @throws IllegalArgumentException If k is null or not mapped.
      */
 
-    public void put(String k, String v) throws IllegalArgumentException {
-        LinkedList<String> values = this.find(k);
+    public void put(K k, V v) throws IllegalArgumentException {
+        LinkedList<V> values = this.find(k);
         if (values == null) {
             throw new IllegalArgumentException();
         }
         values.clear();
-        String[] toMap = v.split(" ");
-        for (int i = 0; i < toMap.length; i++) {
-            values.add(toMap[i]);
-        }
+        values.add(v);
     }
 
     /**
@@ -140,13 +136,13 @@ public class HashMap implements Map<String, String> {
      * @throws IllegalArgumentException If k is null or not mapped.
      */
 
-    public String get(String k) throws IllegalArgumentException {
-        LinkedList<String> values = find(k);
+    public String get(K k) throws IllegalArgumentException {
+        LinkedList<V> values = this.find(k);
         String output = "";
         if (values == null) {
             return "";
         }
-        for (String v : values) {
+        for (V v : values) {
             output += v;
             output += " ";
         }
@@ -160,9 +156,9 @@ public class HashMap implements Map<String, String> {
      * @return True if k is mapped, false otherwise (even for null!).
      */
 
-    public boolean has(String k) {
+    public boolean has(K k) {
         try {
-            LinkedList<String> values = this.find(k); //throws error if no match
+            LinkedList<K> values = this.find(k); //throws error if no match
             if (values == null) {
                 return false;
             }
@@ -189,8 +185,8 @@ public class HashMap implements Map<String, String> {
      */
 
     @Override
-    public Iterator<String> iterator() {
-        ArrayList<String> keys = new ArrayList<>();
+    public Iterator<K> iterator() {
+        ArrayList<K> keys = new ArrayList<>();
         for (int i = 0; i < this.chain.length; i++) {
             if (this.chain[i] != null) {
                 keys.add(Integer.toString(i));

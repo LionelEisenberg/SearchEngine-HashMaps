@@ -10,27 +10,27 @@ public final class HashMapBench {
     private HashMapBench() {}
 
         //insert helper method.
-        private static void insert(HashMap m, String[] data) {
+        private static void insert(HashMapTwo<String, String> m, String[] data) {
             for (Integer i = 0; i < SIZE; i++) {
                 m.insert(data[i], data[i]);
             }
         }
 
         //remove helper method
-        private static void remove(HashMap m, String[] data) {
+        private static void remove(HashMapTwo<String, String> m, String[] data) {
             for (Integer i = 0; i < SIZE; i++) {
                 m.remove(data[i]);
             }
         }
 
         //find helper method.
-        private static void lookup(HashMap m, String[] data) {
+        private static void lookup(HashMapTwo<String, String> m, String[] data) {
             for (Integer i = 0; i < SIZE; i++) {
                 boolean x = m.has(data[i]);
             }
         }
 
-        private static void put(HashMap m, String[] data) {
+        private static void put(HashMapTwo<String, String> m, String[] data) {
             for (Integer i = 0; i < SIZE; i++) {
                 m.put(data[i], data[i]);
             }
@@ -56,7 +56,7 @@ public final class HashMapBench {
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
                 }
-                HashMap m = new HashMap();
+                HashMapTwo<String, String> m = new HashMapTwo<String, String>();
                 b.start();
                 insert(m, data);
             }
@@ -71,7 +71,7 @@ public final class HashMapBench {
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
                 }
-                HashMap m = new HashMap();
+                HashMapTwo<String, String> m = new HashMapTwo<String, String>();
                 insert(m, data);
                 b.start();
                 lookup(m, data);
@@ -87,7 +87,7 @@ public final class HashMapBench {
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
                 }
-                HashMap m = new HashMap();
+                HashMapTwo<String, String> m = new HashMapTwo<String, String>();
                 b.start();
                 remove(m, data);
             }
@@ -102,7 +102,7 @@ public final class HashMapBench {
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
                 }
-                HashMap m = new HashMap();
+                HashMapTwo<String, String> m = new HashMapTwo<String, String>();
                 insert(m, data);
                 b.start();
                 put(m, data);
