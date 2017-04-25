@@ -31,12 +31,19 @@ public class JHUgle {
         Pattern pattern = Pattern.compile("[\\s[^0-9a-zA-Z]]+");
 
         while (inFile.hasNext()) { //get each input in file
-            String url = inFile.nextLine();
+            String url = inFile.nextLine(); //get url into a string
             ArrayList<String> urls = new ArrayList<>();
-            String keyWords = inFile.nextLine();
-            String[] words = pattern.split(keyWords);
+            String keyWords = inFile.nextLine(); //get all keyWords
+            String[] words = pattern.split(keyWords);//split keywords into arra
+            TreeSet<String> wordsSet = new TreeSet<>();
+            //make sure there are no repitions in keys
             for (String word : words) {
+                wordsSet.add(word);
+            }
+            //for each word in set insert in map
+            for (String word : wordsSet) {
                 System.out.println(urls);
+                //if key already exists, concatenate value
                 if (hashmap.has(word)) {
                     urls = hashmap.get(word);
                     urls.add(url);
@@ -57,8 +64,9 @@ public class JHUgle {
         Scanner kb = new Scanner(System.in);
         Stack<ArrayList<String>> rpnStack = new Stack<>();
         System.out.print("> ");
-        while (kb.hasNext()) {
-            String next = kb.next();  //get next input from User
+        String next;
+        while (next = kb.next() && next != "!") {
+            next = kb.next();  //get next input from User
             if (next.compareTo("!") == 0) {
                 break; //break out of loop and exit if the input is "!"
             } else if (next.compareTo("&&") == 0) {
@@ -78,7 +86,7 @@ public class JHUgle {
                     rpnStack.push(listV);
                     System.out.print("> ");
                 } catch (EmptyStackException e) {
-                    System.err.println("Stack to empty to and!");
+                    System.err.println("Stack too empty to and!");
                 }
             } else if (next.compareTo("||") == 0) {
                 Set<String> treeS = new TreeSet<>();
@@ -101,7 +109,7 @@ public class JHUgle {
                     rpnStack.push(listV);
                     System.out.print("> ");
                 } catch (EmptyStackException e) {
-                    System.err.println("Stack to empty to or!");
+                    System.err.println("Stack too empty to or!");
                 }
             } else if (next.compareTo("?") == 0) {
                 try {
