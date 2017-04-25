@@ -32,17 +32,17 @@ public class JHUgle {
         while (inFile.hasNext()) { //get each input in file
             String url = inFile.nextLine();
             LinkedList<String> urls = new LinkedList<>();
-            urls.add(url);
             String keyWords = inFile.nextLine();
             String[] words = pattern.split(keyWords);
             for (String word : words) {
+                System.out.println(urls);
                 if (hashmap.has(word)) {
-                    LinkedList<String> urls2 = new LinkedList<>();
-                    urls2 = hashmap.get(word);
-                    urls2.add(url);
-                    System.out.println("Key is :" + word +"\ninsert is :" + urls.toString());
-                    hashmap.put(word, urls2);
+                    urls = hashmap.get(word);
+                    urls.addFirst(url);
+                    hashmap.put(word, urls);
                 } else {
+                    urls = new LinkedList<>();
+                    urls.addFirst(url);
                     hashmap.insert(word, urls);
                 }
             }
@@ -57,7 +57,6 @@ public class JHUgle {
         Stack<LinkedList<String>> rpnStack = new Stack<>();
         System.out.print("> ");
         while (kb.hasNext()) {
-            System.out.print("> ");
             String next = kb.next();  //get next input from User
             if (next.compareTo("!") == 0) {
                 break; //break out of loop and exit if the input is "!"
@@ -79,6 +78,7 @@ public class JHUgle {
                 } catch (EmptyStackException e) {
                     System.err.println("Stack to empty to and!");
                 }
+                System.out.print("> ");
             } else if (next.compareTo("||") == 0) {
                 Set<String> treeS = new TreeSet<>();
                 String oredKeyToPopBack = "";
@@ -101,6 +101,7 @@ public class JHUgle {
                 } catch (EmptyStackException e) {
                     System.err.println("Stack to empty to or!");
                 }
+                System.out.print("> ");
             } else if (next.compareTo("?") == 0) {
                 try {
                     LinkedList<String> values = rpnStack.peek();
@@ -110,9 +111,11 @@ public class JHUgle {
                 } catch (EmptyStackException e) {
                     System.err.println("Stack is empty");
                 }
+                System.out.print("> ");
             } else {
                 if (hashmap.has(next)) {
                     rpnStack.push(hashmap.get(next));
+                    System.out.print("> ");
                 } else {
                     System.out.println("Cannot Be found in database or this" +
                     "command is not recognised, please try again.");
