@@ -15,7 +15,7 @@ import java.lang.Exception;
 
 
 public class JHUgle {
-    private static HashMap hashmap = new HashMap();
+    private static HashMapTwo<String, LinkedList<String>> hashmap = new HashMapTwo<String, LinkedList<String>>();
 
     public static void main(String[] args) throws IOException {
         Scanner inFile;
@@ -31,10 +31,20 @@ public class JHUgle {
         int i = 0;
         while (inFile.hasNext()) { //get each input in file
             String url = inFile.nextLine();
+            LinkedList<String> urls = new LinkedList<>();
+            urls.add(url);
             String keyWords = inFile.nextLine();
             String[] words = pattern.split(keyWords);
             for (String word : words) {
-                hashmap.insert(word, url);
+                if (hashmap.has(word)) {
+                    LinkedList<String> urls2 = new LinkedList<>();
+                    urls2 = hashmap.get(word);
+                    urls2.add(url);
+                    System.out.println("Key is :" + word +"\ninsert is :" + urls.toString());
+                    hashmap.put(word, urls2);
+                } else {
+                    hashmap.insert(word, urls);
+                }
             }
         }
         System.out.println("Index created");
@@ -42,64 +52,58 @@ public class JHUgle {
         GetInputQuery(hashmap);
     }
 
-    private static void GetInputQuery(HashMap hashmap) {
+    private static void GetInputQuery(HashMapTwo<String, LinkedList<String>> hashmap) {
         Scanner kb = new Scanner(System.in);
-        Stack<String> rpnStack = new Stack<>();
+        Stack<LinkedList<String>> rpnStack = new Stack<>();
         System.out.print("> ");
         while (kb.hasNext()) {
             System.out.print("> ");
-            String next = kb.next(); //get next input from User
+            String next = kb.next();  //get next input from User
             if (next.compareTo("!") == 0) {
                 break; //break out of loop and exit if the input is "!"
             } else if (next.compareTo("&&") == 0) {
                 LinkedList<String> listV = new LinkedList<>();
                 String oredKeyToPopBack = "";
                 try {
-                    String key1 = rpnStack.pop();
-                    String key2 = rpnStack.pop();
-                    String[] urls = key1.split(" ");
-                    String[] urls2 = key2.split(" ");
+                    LinkedList<String> val1 = rpnStack.pop();
+                    LinkedList<String> val2 = rpnStack.pop();
 
-                    for (String url : urls) {
-                        for (String url2 : urls2) {
-                            if (url.compareTo(url2) == 0) {
-                                listV.add(url);
+                    for (String url1 : val1) {
+                        for (String url2 : val2) {
+                            if (url1.compareTo(url2) == 0) {
+                                listV.add(url1);
                             }
                         }
                     }
-                    for (String result : listV) {
-                        oredKeyToPopBack += result + " ";
-                    }
-                    rpnStack.push(oredKeyToPopBack);
+                    rpnStack.push(listV);
                 } catch (EmptyStackException e) {
                     System.err.println("Stack to empty to and!");
                 }
             } else if (next.compareTo("||") == 0) {
                 Set<String> treeS = new TreeSet<>();
                 String oredKeyToPopBack = "";
+                LinkedList<String> listV = new LinkedList<>();
                 try {
-                    String key1 = rpnStack.pop();
-                    String key2 = rpnStack.pop();
-
-                    String[] urls = key1.split(" ");
-                    for (String url : urls) {
+                    LinkedList<String> val1 = rpnStack.pop();
+                    LinkedList<String> val2 = rpnStack.pop();
+                    for (String url : val1) {
                         treeS.add(url);
                     }
 
-                    urls = key2.split(" ");
-                    for (String url : urls) {
+                    for (String url : val2) {
                         treeS.add(url);
                     }
+
                     for (String result : treeS) {
-                        oredKeyToPopBack += result + " ";
+                        listV.add(result);
                     }
-                    rpnStack.push(oredKeyToPopBack);
+                    rpnStack.push(listV);
                 } catch (EmptyStackException e) {
                     System.err.println("Stack to empty to or!");
                 }
             } else if (next.compareTo("?") == 0) {
                 try {
-                    String[] values = rpnStack.peek().split(" ");
+                    LinkedList<String> values = rpnStack.peek();
                     for (String value : values) {
                         System.out.println(value);
                     }

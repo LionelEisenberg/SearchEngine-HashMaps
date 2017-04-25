@@ -119,7 +119,8 @@ public class HashMapTwo<K, V> implements Map<K, V> {
         int index = 0; //keeps track of number of elements searched
         while (this.chain[mod] != null && index < this.chain.length) {
             if (this.chain[mod].placeholder == true) {
-                this.chain[mod] = new Node(k, v);
+                this.chain[mod] = new Node(k, v);//why no increase size here?
+                this.size++;
                 return;
             }
             mod = (mod + this.probe(probeCount)) % this.chain.length; //moves on to next slot
@@ -173,7 +174,7 @@ public class HashMapTwo<K, V> implements Map<K, V> {
         } else if (n.placeholder == true) {
             throw new IllegalArgumentException(); //node considered deleted if true
         }
-        n.value = v;
+        n = new Node(k, v);
     }
 
     /**

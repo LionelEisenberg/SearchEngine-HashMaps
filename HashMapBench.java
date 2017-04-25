@@ -4,35 +4,39 @@ import java.util.*;
 
 public final class HashMapBench {
     private static final int SIZE = 200;
-    private static final int STRINGSIZE = 5;
+    private static final int STRINGSIZE = 8;
     private static String allPossible = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static Random random = new Random();
     private HashMapBench() {}
 
         //insert helper method.
-        private static void insert(HashMapTwo<String, String> m, String[] data) {
+        private static void insert(HashMapTwo<String, LinkedList<String>> m, String[] data) {
             for (Integer i = 0; i < SIZE; i++) {
-                m.insert(data[i], data[i]);
+                LinkedList<String> New = new LinkedList<String>();
+                New.add(data[i]);
+                m.insert(data[i], New);
             }
         }
 
         //remove helper method
-        private static void remove(HashMapTwo<String, String> m, String[] data) {
+        private static void remove(HashMapTwo<String, LinkedList<String>> m, String[] data) {
             for (Integer i = 0; i < SIZE; i++) {
                 m.remove(data[i]);
             }
         }
 
         //find helper method.
-        private static void lookup(HashMapTwo<String, String> m, String[] data) {
+        private static void lookup(HashMapTwo<String, LinkedList<String>> m, String[] data) {
             for (Integer i = 0; i < SIZE; i++) {
                 boolean x = m.has(data[i]);
             }
         }
 
-        private static void put(HashMapTwo<String, String> m, String[] data) {
+        private static void put(HashMapTwo<String, LinkedList<String>> m, String[] data) {
             for (Integer i = 0; i < SIZE; i++) {
-                m.put(data[i], data[i]);
+                LinkedList<String> New = new LinkedList<String>();
+                New.add(data[i]);
+                m.put(data[i], New);
             }
         }
 
@@ -56,7 +60,7 @@ public final class HashMapBench {
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
                 }
-                HashMapTwo<String, String> m = new HashMapTwo<String, String>();
+                HashMapTwo<String, LinkedList<String>> m = new HashMapTwo<String, LinkedList<String>>();
                 b.start();
                 insert(m, data);
             }
@@ -71,7 +75,7 @@ public final class HashMapBench {
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
                 }
-                HashMapTwo<String, String> m = new HashMapTwo<String, String>();
+                HashMapTwo<String, LinkedList<String>> m = new HashMapTwo<String, LinkedList<String>>();
                 insert(m, data);
                 b.start();
                 lookup(m, data);
@@ -87,7 +91,7 @@ public final class HashMapBench {
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
                 }
-                HashMapTwo<String, String> m = new HashMapTwo<String, String>();
+                HashMapTwo<String, LinkedList<String>> m = new HashMapTwo<String, LinkedList<String>>();
                 b.start();
                 remove(m, data);
             }
@@ -102,7 +106,7 @@ public final class HashMapBench {
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
                 }
-                HashMapTwo<String, String> m = new HashMapTwo<String, String>();
+                HashMapTwo<String, LinkedList<String>> m = new HashMapTwo<String, LinkedList<String>>();
                 insert(m, data);
                 b.start();
                 put(m, data);
