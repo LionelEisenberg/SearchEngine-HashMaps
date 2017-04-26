@@ -174,7 +174,7 @@ public class HashMapTwo<K, V> implements Map<K, V> {
         } else if (n.placeholder == true) {
             throw new IllegalArgumentException(); //node considered deleted if true
         }
-        n = v;
+        n = new Node(k,v);
     }
 
     /**
