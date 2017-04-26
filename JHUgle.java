@@ -42,7 +42,6 @@ public class JHUgle {
             }
             //for each word in set insert in map
             for (String word : wordsSet) {
-                System.out.println(urls);
                 //if key already exists, concatenate value
                 if (hashmap.has(word)) {
                     urls = hashmap.get(word);
