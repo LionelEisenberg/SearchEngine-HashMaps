@@ -135,7 +135,7 @@ public class HashMapTwo<K, V> implements Map<K, V> {
     }
 
     private void resize() {
-        int nextSize = this.size*2;
+        int nextSize = this.chain.length*2;
         Node[] temp = (Node[]) Array.newInstance(Node.class, this.chain.length); //default
         for (int i = 0; i < this.chain.length; i++) {
             if (this.chain[i] != null && this.chain[i].placeholder == false) {
