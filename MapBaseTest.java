@@ -9,8 +9,8 @@ import static org.junit.Assert.assertTrue;
 
 public abstract class MapBaseTest {
     private static Random rand = new Random();
-    public OrderedMap<Integer, Integer> map;
-    protected abstract OrderedMap<Integer, Integer> createMap();
+    public Map<Integer, LinkedList<String>> map;
+    protected abstract Map<Integer, LinkedList<String>> createMap();
 
     @Before
     public void setupMapTests() {
