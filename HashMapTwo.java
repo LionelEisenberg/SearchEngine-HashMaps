@@ -15,6 +15,8 @@ import java.lang.reflect.Array;
 
 
 public class HashMapTwo<K, V> implements Map<K, V> {
+    private static final double LOADFACTOR = 0.5;
+    private static final int DEFAULTSIZE = 131;
 
     public static void main (String[] args) {
         HashMapTwo<String, ArrayList<String>> map = new HashMapTwo<>(3);
@@ -57,7 +59,7 @@ public class HashMapTwo<K, V> implements Map<K, V> {
 
     public HashMapTwo () {
         this.size = 0;
-        this.chain = (Node[]) Array.newInstance(Node.class, 10000); //default
+        this.chain = (Node[]) Array.newInstance(Node.class, DEFAULTSIZE); //default
     }
 
     /**
@@ -112,12 +114,14 @@ public class HashMapTwo<K, V> implements Map<K, V> {
         if (k == null) {
             throw new IllegalArgumentException();
         }
+        if (LOADFACTOR * this.chain.length <= this.size) {
+            this.resize();
+        }
         int hashCode = this.hashFunction(k);
         int mod = (hashCode % this.chain.length + this.chain.length)
                 % this.chain.length;
         int probeCount = 1; //keeps track of how far to probe
-        int index = 0; //keeps track of number of elements searched
-        while (this.chain[mod] != null && index < this.chain.length) {
+        while (this.chain[mod] != null) {
             if (this.chain[mod].placeholder == true) {
                 this.chain[mod] = new Node(k, v);//why no increase size here?
                 this.size++;
@@ -125,13 +129,26 @@ public class HashMapTwo<K, V> implements Map<K, V> {
             }
             mod = (mod + this.probe(probeCount)) % this.chain.length; //moves on to next slot
             probeCount++;
-            index++;
-        }
-        if (index >= this.chain.length) {
-            return; //IN THIS CASE WE NEED TO GROW THE ARRAY
         }
         this.chain[mod] = new Node(k, v);
         this.size++;
+    }
+
+    private void resize() {
+        int nextSize = this.size*2;
+        Node[] temp = (Node[]) Array.newInstance(Node.class, this.chain.length); //default
+        for (int i = 0; i < this.chain.length; i++) {
+            if (this.chain[i] != null && this.chain[i].placeholder == false) {
+                temp[i] = new Node(this.chain[i].key, this.chain[i].value);
+            }
+        }
+        this.chain = (Node[]) Array.newInstance(Node.class, nextSize);
+        this.size = 0;
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] != null) {
+                this.insert(temp[i].key, temp[i].value);
+            }
+        }
     }
 
     /**
