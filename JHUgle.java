@@ -65,70 +65,72 @@ public class JHUgle {
         Stack<ArrayList<String>> rpnStack = new Stack<>();
         System.out.print("> ");
         while (kb.hasNext()) {
-            String next = kb.next();  //get next input from User
-            if (next.compareTo("!") == 0) {
-                break; //break out of loop and exit if the input is "!"
-            } else if (next.compareTo("&&") == 0) {
-                ArrayList<String> listV = new ArrayList<>();
-                String oredKeyToPopBack = "";
-                try {
-                    ArrayList<String> val1 = rpnStack.pop();
-                    ArrayList<String> val2 = rpnStack.pop();
+            String[] nextLine = kb.nextLine().split(" ");
+            for (int i = 0; i < nextLine.length; i++) {
+                String next = nextLine[i];
 
-                    for (String url1 : val1) {
-                        for (String url2 : val2) {
-                            if (url1.compareTo(url2) == 0) {
-                                listV.add(url1);
+                if (next.compareTo("!") == 0) {
+                    break; //break out of loop and exit if the input is "!"
+                } else if (next.compareTo("&&") == 0) {
+                    ArrayList<String> listV = new ArrayList<>();
+                    String oredKeyToPopBack = "";
+                    try {
+                        ArrayList<String> val1 = rpnStack.pop();
+                        ArrayList<String> val2 = rpnStack.pop();
+
+                        for (String url1 : val1) {
+                            for (String url2 : val2) {
+                                if (url1.compareTo(url2) == 0) {
+                                    listV.add(url1);
+                                }
                             }
                         }
+                        rpnStack.push(listV);
+                        System.out.print("> ");
+                    } catch (EmptyStackException e) {
+                        System.err.println("Stack too empty to and!");
                     }
-                    rpnStack.push(listV);
-                    System.out.print("> ");
-                } catch (EmptyStackException e) {
-                    System.err.println("Stack too empty to and!");
-                }
-            } else if (next.compareTo("||") == 0) {
-                Set<String> treeS = new TreeSet<>();
-                String oredKeyToPopBack = "";
-                ArrayList<String> listV = new ArrayList<>();
-                try {
-                    ArrayList<String> val1 = rpnStack.pop();
-                    ArrayList<String> val2 = rpnStack.pop();
-                    for (String url : val1) {
-                        treeS.add(url);
-                    }
+                } else if (next.compareTo("||") == 0) {
+                    Set<String> treeS = new TreeSet<>();
+                    String oredKeyToPopBack = "";
+                    ArrayList<String> listV = new ArrayList<>();
+                    try {
+                        ArrayList<String> val1 = rpnStack.pop();
+                        ArrayList<String> val2 = rpnStack.pop();
+                        for (String url : val1) {
+                            treeS.add(url);
+                        }
 
-                    for (String url : val2) {
-                        treeS.add(url);
-                    }
+                        for (String url : val2) {
+                            treeS.add(url);
+                        }
 
-                    for (String result : treeS) {
-                        listV.add(result);
+                        for (String result : treeS) {
+                            listV.add(result);
+                        }
+                        rpnStack.push(listV);
+                    } catch (EmptyStackException e) {
+                        System.err.println("Stack too empty to or!");
                     }
-                    rpnStack.push(listV);
-                    System.out.print("> ");
-                } catch (EmptyStackException e) {
-                    System.err.println("Stack too empty to or!");
-                }
-            } else if (next.compareTo("?") == 0) {
-                try {
-                    ArrayList<String> values = rpnStack.peek();
-                    for (String value : values) {
-                        System.out.println(value);
+                } else if (next.compareTo("?") == 0) {
+                    try {
+                        ArrayList<String> values = rpnStack.peek();
+                        for (String value : values) {
+                            System.out.println(value);
+                        }
+                    } catch (EmptyStackException e) {
+                        System.err.println("Stack is empty");
                     }
-                    System.out.print("> ");
-                } catch (EmptyStackException e) {
-                    System.err.println("Stack is empty");
-                }
-            } else {
-                if (hashmap.has(next)) {
-                    rpnStack.push(hashmap.get(next));
-                    System.out.print("> ");
                 } else {
-                    System.out.println("Cannot Be found in database or this" +
-                    "command is not recognised, please try again.");
+                    if (hashmap.has(next)) {
+                        rpnStack.push(hashmap.get(next));
+                    } else {
+                        System.out.println("Cannot Be found in database or this" +
+                        "command is not recognised, please try again.");
+                    }
                 }
             }
+            System.out.print("> ");
         }
     }
 }
