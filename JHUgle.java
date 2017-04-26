@@ -64,9 +64,8 @@ public class JHUgle {
         Scanner kb = new Scanner(System.in);
         Stack<ArrayList<String>> rpnStack = new Stack<>();
         System.out.print("> ");
-        String next;
-        while (next = kb.next() && next != "!") {
-            next = kb.next();  //get next input from User
+        while (kb.hasNext()) {
+            String next = kb.next();  //get next input from User
             if (next.compareTo("!") == 0) {
                 break; //break out of loop and exit if the input is "!"
             } else if (next.compareTo("&&") == 0) {
