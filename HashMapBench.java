@@ -10,11 +10,9 @@ public final class HashMapBench {
     private HashMapBench() {}
 
         //insert helper method.
-        private static void insert(HashMapTwo<String, ArrayList<String>> m, String[] data) {
+        private static void insert(HashMapTwo<String, ArrayList<String>> m, String[] data, ArrayList<String> list) {
             for (Integer i = 0; i < SIZE; i++) {
-                ArrayList<String> New = new ArrayList<String>();
-                New.add(data[i]);
-                m.insert(data[i], New);
+                m.insert(data[i], list);
             }
         }
 
@@ -32,11 +30,9 @@ public final class HashMapBench {
             }
         }
 
-        private static void put(HashMapTwo<String, ArrayList<String>> m, String[] data) {
+        private static void put(HashMapTwo<String, ArrayList<String>> m, String[] data, ArrayList<String> list) {
             for (Integer i = 0; i < SIZE; i++) {
-                ArrayList<String> New = new ArrayList<String>();
-                New.add(data[i]);
-                m.put(data[i], New);
+                m.put(data[i], list);
             }
         }
 
@@ -56,13 +52,15 @@ public final class HashMapBench {
             for (int n = 0; n < b.reps(); n++) {
                 b.stop();
                 String[] data = new String[SIZE];
+                ArrayList<String> list = new ArrayList<String>();
                 //Make an array of size 200 to benchmark
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
+                    list.add(data[i]);
                 }
                 HashMapTwo<String, ArrayList<String>> m = new HashMapTwo<String, ArrayList<String>>();
                 b.start();
-                insert(m, data);
+                insert(m, data, list);
             }
         }
 
@@ -71,12 +69,14 @@ public final class HashMapBench {
             for (int n = 0; n < b.reps(); n++) {
                 b.stop();
                 String[] data = new String[SIZE];
+                ArrayList<String> list = new ArrayList<String>();
                 //Make an array of size 200 to benchmark
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
+                    list.add(data[i]);
                 }
                 HashMapTwo<String, ArrayList<String>> m = new HashMapTwo<String, ArrayList<String>>();
-                insert(m, data);
+                insert(m, data, list);
                 b.start();
                 lookup(m, data);
             }
@@ -102,14 +102,16 @@ public final class HashMapBench {
             for (int n = 0; n < b.reps(); n++) {
                 b.stop();
                 String[] data = new String[SIZE];
+                ArrayList<String> list = new ArrayList<String>();
                 //Make an array of size 200 to benchmark
                 for(int i = 0; i < SIZE; i++) {
                     data[i] = randomString(STRINGSIZE);
+                    list.add(data[i]);
                 }
                 HashMapTwo<String, ArrayList<String>> m = new HashMapTwo<String, ArrayList<String>>();
-                insert(m, data);
+                insert(m, data, list);
                 b.start();
-                put(m, data);
+                put(m, data, list);
             }
         }
     }
