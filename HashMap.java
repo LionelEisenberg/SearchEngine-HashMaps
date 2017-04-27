@@ -18,13 +18,6 @@ public class HashMap<K, V> implements Map<K, V> {
     private static final double LOADFACTOR = 0.5;
     private static final int DEFAULTSIZE = 131; //size is always prime
 
-    public static void main (String[] args) {
-        HashMap<Integer, Integer> m = new HashMap<>();
-        m.insert(1, 1);
-        m.put(1, 2);
-        System.out.println(m.get(1));
-    }
-
     private class Node {
         K key;
         V value;
@@ -175,7 +168,7 @@ public class HashMap<K, V> implements Map<K, V> {
         }
         Node n = this.find(k); //gets node to remove
         if (n == null) {
-            return null; // returns null if node is null
+            throw new IllegalArgumentException();
         } else {
             n.placeholder = true; //"deletes" by setting placeholder status
         }
