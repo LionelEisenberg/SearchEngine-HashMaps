@@ -1,12 +1,9 @@
 import com.github.phf.jb.Bench;
 import com.github.phf.jb.Bee;
-import java.util.*;
+import java.util.ArrayList;
 
 public final class HashMapBench {
     private static final int SIZE = 200;
-    private static final int STRINGSIZE = 8;
-    private static String allPossible = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    private static Random random = new Random();
     private HashMapBench() {}
 
         //insert helper method.
