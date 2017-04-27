@@ -152,7 +152,6 @@ public class HashMapTwo<K, V> implements Map<K, V> {
     }
 
     private int getNextPrime(int size) {
-        System.out.println(size);
         size = 2*size + 1;
         int prime = 0;
         for (int i = size; i < 2*size; i += 2) {
