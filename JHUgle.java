@@ -3,7 +3,6 @@ Lionel Eisenberg (leisenb5) & Sanat Deshpande (sdeshpa4)
 main file for JHUgle.
 */
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.File;
 import java.util.EmptyStackException;
@@ -13,12 +12,21 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 import java.util.Set;
 import java.util.Stack;
-import java.lang.Exception;
 
+/** JHUgle class. */
+public final class JHUgle {
+    /** Hashmap. */
+    private static HashMap<String, ArrayList<String>> hashmap =
+        new HashMap<String, ArrayList<String>>();
 
-public class JHUgle {
-    private static HashMap<String, ArrayList<String>> hashmap = new HashMap<String, ArrayList<String>>();
+    private JHUgle() {}
 
+    /**
+    * Main file for JHUgle, indexes file.
+    *
+    * @param args command line which gives name of file to index
+    * @throws IOException if file is non existent.
+    */
     public static void main(String[] args) throws IOException {
         Scanner inFile;
         if (0 < args.length) {
@@ -34,7 +42,7 @@ public class JHUgle {
             String url = inFile.nextLine(); //get url into a string
             ArrayList<String> urls = new ArrayList<>();
             String keyWords = inFile.nextLine(); //get all keyWords
-            String[] words = pattern.split(keyWords);//split keywords into arra
+            String[] words = pattern.split(keyWords); //split keywords into arra
             TreeSet<String> wordsSet = new TreeSet<>();
             //make sure there are no repitions in keys
             for (String word : words) {
@@ -56,10 +64,11 @@ public class JHUgle {
         }
         System.out.println("Index created");
 
-        GetInputQuery(hashmap);
+        getInputQuery();
     }
 
-    private static void GetInputQuery(HashMap<String, ArrayList<String>> hashmap) {
+    private static void getInputQuery() {
+
         Scanner kb = new Scanner(System.in);
         Stack<ArrayList<String>> rpnStack = new Stack<>();
         System.out.print("> ");
@@ -123,8 +132,8 @@ public class JHUgle {
                     if (hashmap.has(next)) {
                         rpnStack.push(hashmap.get(next));
                     } else {
-                        System.out.println("Cannot Be found in database or this" +
-                        "command is not recognised, please try again.");
+                        System.out.println("Cannot Be found in database or this"
+                            + "command is not recognised, please try again.");
                     }
                 }
             }
