@@ -90,7 +90,7 @@ public class HashMap<K, V> implements Map<K, V> {
     }
 
     private int probe(int n) {
-        return n*n; // probes quadratically
+        return n * n; // probes quadratically
     }
 
     /**
@@ -146,7 +146,7 @@ public class HashMap<K, V> implements Map<K, V> {
     }
 
     private int getNextPrime(int size) {
-        size = 2*size + 1;
+        size = 2 * size + 1;
         int prime = 0;
         for (int i = size; i < 2*size; i += 2) {
             for (int j = 3; j < i/2; j += 2) {
