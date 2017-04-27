@@ -48,7 +48,7 @@ public class HashMap<K, V> implements Map<K, V> {
      * Initializes array with default size.
      */
 
-    public HashMap () {
+    public HashMap() {
         this.size = 0;
         this.chain = (Node[]) Array.newInstance(Node.class, DEFAULTSIZE); //default
     }
@@ -57,7 +57,7 @@ public class HashMap<K, V> implements Map<K, V> {
      * Initializes array with specified size.
      */
 
-    public HashMap (int s) {
+    public HashMap(int s) {
         this.size = 0;
         this.chain = (Node[]) Array.newInstance(Node.class, s); //user specified size
     }
@@ -67,7 +67,7 @@ public class HashMap<K, V> implements Map<K, V> {
         return key.hashCode(); //returns hashcode
     }
 
-    private Node find (K k) throws IllegalArgumentException {
+    private Node find(K k) throws IllegalArgumentException {
         if (k == null) {
             throw new IllegalArgumentException();
         }
@@ -77,7 +77,7 @@ public class HashMap<K, V> implements Map<K, V> {
         int index = 0; //keeps track of how many elements are searched
         while (this.chain[mod] != null && index < this.chain.length) {
             index++;
-            if (this.chain[mod].placeholder == true) { //skips over tombstone
+            if (this.chain[mod].placeholder) { //skips over tombstone
                 continue;
             }
             if (this.chain[mod].key.equals(k)) { //checks for key
@@ -116,7 +116,7 @@ public class HashMap<K, V> implements Map<K, V> {
                 % this.chain.length;
         int probeCount = 1; //keeps track of how far to probe
         while (this.chain[mod] != null) {
-            if (this.chain[mod].placeholder == true) {
+            if (this.chain[mod].placeholder) {
                 this.chain[mod] = new Node(k, v);//why no increase size here?
                 this.size++;
                 return;
@@ -132,7 +132,7 @@ public class HashMap<K, V> implements Map<K, V> {
         int nextSize = getNextPrime(this.chain.length);
         Node[] temp = (Node[]) Array.newInstance(Node.class, this.chain.length); //default
         for (int i = 0; i < this.chain.length; i++) {
-            if (this.chain[i] != null && this.chain[i].placeholder == false) {
+            if (this.chain[i] != null && !this.chain[i].placeholder) {
                 temp[i] = new Node(this.chain[i].key, this.chain[i].value);
             }
         }
@@ -220,7 +220,7 @@ public class HashMap<K, V> implements Map<K, V> {
         Node n = this.find(k);
         if (n == null) {
             throw new IllegalArgumentException(); //not mapped
-        } else if (n.placeholder == true) {
+        } else if (n.placeholder) {
             throw new IllegalArgumentException(); //not mapped (considered deleted)
         }
         return n.value;
