@@ -55,7 +55,8 @@ public final class HashMapBench {
                 ArrayList<String> list = new ArrayList<String>();
                 //Make an array of size 200 to benchmark
                 for(int i = 0; i < SIZE; i++) {
-                    data[i] = randomString(STRINGSIZE);
+                    //data[i] = randomString(STRINGSIZE);
+                    data[i] = allPossible.charAt(random.nextInt(allPossible.length() - 1)) + "";
                     list.add(data[i]);
                 }
                 HashMapTwo<String, ArrayList<String>> m = new HashMapTwo<String, ArrayList<String>>();
@@ -72,7 +73,8 @@ public final class HashMapBench {
                 ArrayList<String> list = new ArrayList<String>();
                 //Make an array of size 200 to benchmark
                 for(int i = 0; i < SIZE; i++) {
-                    data[i] = randomString(STRINGSIZE);
+                    //data[i] = randomString(STRINGSIZE);
+                    data[i] = allPossible.charAt(random.nextInt(allPossible.length() - 1)) + "";
                     list.add(data[i]);
                 }
                 HashMapTwo<String, ArrayList<String>> m = new HashMapTwo<String, ArrayList<String>>();
@@ -89,7 +91,8 @@ public final class HashMapBench {
                 String[] data = new String[SIZE];
                 //Make an array of size 200 to benchmark
                 for(int i = 0; i < SIZE; i++) {
-                    data[i] = randomString(STRINGSIZE);
+                    //data[i] = randomString(STRINGSIZE);
+                    data[i] = allPossible.charAt(random.nextInt(allPossible.length() - 1)) + "";
                 }
                 HashMapTwo<String, ArrayList<String>> m = new HashMapTwo<String, ArrayList<String>>();
                 b.start();
@@ -105,7 +108,8 @@ public final class HashMapBench {
                 ArrayList<String> list = new ArrayList<String>();
                 //Make an array of size 200 to benchmark
                 for(int i = 0; i < SIZE; i++) {
-                    data[i] = randomString(STRINGSIZE);
+                    //data[i] = randomString(STRINGSIZE);
+                    data[i] = allPossible.charAt(random.nextInt(allPossible.length() - 1)) + "";
                     list.add(data[i]);
                 }
                 HashMapTwo<String, ArrayList<String>> m = new HashMapTwo<String, ArrayList<String>>();
