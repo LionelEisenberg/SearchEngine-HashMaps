@@ -135,7 +135,7 @@ public class HashMapTwo<K, V> implements Map<K, V> {
     }
 
     private void resize() {
-        int nextSize = this.chain.length*2;
+        int nextSize = getNextPrime(this.chain.length);
         Node[] temp = (Node[]) Array.newInstance(Node.class, this.chain.length); //default
         for (int i = 0; i < this.chain.length; i++) {
             if (this.chain[i] != null && this.chain[i].placeholder == false) {
@@ -149,6 +149,24 @@ public class HashMapTwo<K, V> implements Map<K, V> {
                 this.insert(temp[i].key, temp[i].value);
             }
         }
+    }
+
+    private int getNextPrime(int size) {
+        System.out.println(size);
+        size = 2*size + 1;
+        int prime = 0;
+        for (int i = size; i < 2*size; i += 2) {
+            for (int j = 3; j < i/2; j += 2) {
+                if (i % j == 0) {
+                    prime = 1;
+                }
+            }
+            if (prime == 0) {
+                return i;
+            }
+            prime = 0;
+        }
+        return size;
     }
 
     /**
