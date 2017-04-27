@@ -270,7 +270,7 @@ public class HashMap<K, V> implements Map<K, V> {
      * @return s string of hashedkey: value
      */
 
-     public String toString() {
+    public String toString() {
         String out = "";
         for (int i = 0; i < this.chain.length; i++) {
             if (this.chain[i] != null) {
