@@ -55,6 +55,7 @@ public class HashMap<K, V> implements Map<K, V> {
 
     /**
      * Initializes array with specified size.
+     * @param s size of initial array
      */
 
     public HashMap(int s) {
@@ -117,7 +118,7 @@ public class HashMap<K, V> implements Map<K, V> {
         int probeCount = 1; //keeps track of how far to probe
         while (this.chain[mod] != null) {
             if (this.chain[mod].placeholder) {
-                this.chain[mod] = new Node(k, v);//why no increase size here?
+                this.chain[mod] = new Node(k, v); //why no increase size here?
                 this.size++;
                 return;
             }
@@ -129,7 +130,7 @@ public class HashMap<K, V> implements Map<K, V> {
     }
 
     private void resize() {
-        int nextSize = getNextPrime(this.chain.length);
+        int nextSize = this.getNextPrime(this.chain.length);
         Node[] temp = (Node[]) Array.newInstance(Node.class, this.chain.length); //default
         for (int i = 0; i < this.chain.length; i++) {
             if (this.chain[i] != null && !this.chain[i].placeholder) {
