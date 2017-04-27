@@ -50,7 +50,7 @@ public class HashMap<K, V> implements Map<K, V> {
 
     public HashMap() {
         this.size = 0;
-        this.chain = (Node[]) Array.newInstance(Node.class, DEFAULTSIZE); //default
+        this.chain = (Node[]) Array.newInstance(Node.class, DEFAULTSIZE);
     }
 
     /**
@@ -60,7 +60,7 @@ public class HashMap<K, V> implements Map<K, V> {
 
     public HashMap(int s) {
         this.size = 0;
-        this.chain = (Node[]) Array.newInstance(Node.class, s); //user specified size
+        this.chain = (Node[]) Array.newInstance(Node.class, s); //user specified
     }
 
     private int hashFunction(K k) {
@@ -73,7 +73,8 @@ public class HashMap<K, V> implements Map<K, V> {
             throw new IllegalArgumentException();
         }
         int hashCode = this.hashFunction(k);
-        int mod = (hashCode % this.chain.length + this.chain.length) % this.chain.length;
+        int mod = (hashCode % this.chain.length + this.chain.length)
+                    % this.chain.length;
         int probeCount = 1; //keeps track of how far to probe
         int index = 0; //keeps track of how many elements are searched
         while (this.chain[mod] != null && index < this.chain.length) {
@@ -84,7 +85,8 @@ public class HashMap<K, V> implements Map<K, V> {
             if (this.chain[mod].key.equals(k)) { //checks for key
                 return this.chain[mod];
             }
-            mod = (mod + this.probe(probeCount)) % this.chain.length; //moves on to next slot
+            //moves on to next slot
+            mod = (mod + this.probe(probeCount)) % this.chain.length;
             probeCount++; // increment probing for next pass
         }
         return null;
@@ -122,7 +124,8 @@ public class HashMap<K, V> implements Map<K, V> {
                 this.size++;
                 return;
             }
-            mod = (mod + this.probe(probeCount)) % this.chain.length; //moves on to next slot
+            //moves on to next slot
+            mod = (mod + this.probe(probeCount)) % this.chain.length;
             probeCount++;
         }
         this.chain[mod] = new Node(k, v);
@@ -131,7 +134,7 @@ public class HashMap<K, V> implements Map<K, V> {
 
     private void resize() {
         int nextSize = this.getNextPrime(this.chain.length);
-        Node[] temp = (Node[]) Array.newInstance(Node.class, this.chain.length); //default
+        Node[] temp = (Node[]) Array.newInstance(Node.class, this.chain.length);
         for (int i = 0; i < this.chain.length; i++) {
             if (this.chain[i] != null && !this.chain[i].placeholder) {
                 temp[i] = new Node(this.chain[i].key, this.chain[i].value);
@@ -201,7 +204,7 @@ public class HashMap<K, V> implements Map<K, V> {
         if (n == null) {
             throw new IllegalArgumentException(); //node not mapped
         } else if (n.placeholder) {
-            throw new IllegalArgumentException(); //node considered deleted if true
+            throw new IllegalArgumentException(); //considered deleted if true
         }
         n.value = v;
     }
@@ -222,7 +225,7 @@ public class HashMap<K, V> implements Map<K, V> {
         if (n == null) {
             throw new IllegalArgumentException(); //not mapped
         } else if (n.placeholder) {
-            throw new IllegalArgumentException(); //not mapped (considered deleted)
+            throw new IllegalArgumentException(); //(considered deleted)
         }
         return n.value;
     }
