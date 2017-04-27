@@ -85,7 +85,6 @@ public class JHUgle {
                             }
                         }
                         rpnStack.push(listV);
-                        System.out.print("> ");
                     } catch (EmptyStackException e) {
                         System.err.println("Stack too empty to and!");
                     }
