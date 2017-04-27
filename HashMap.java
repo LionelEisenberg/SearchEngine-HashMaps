@@ -19,20 +19,10 @@ public class HashMap<K, V> implements Map<K, V> {
     private static final int DEFAULTSIZE = 131; //size is always prime
 
     public static void main (String[] args) {
-        HashMap<String, ArrayList<String>> map = new HashMap<>(3);
-        //System.out.println(map.size());
-        ArrayList<String> list = new ArrayList<>();
-        list.add("English");
-        map.insert("USA", list);
-        list = new ArrayList<>();
-        list.add("French");
-        map.insert("France", list);
-        list = new ArrayList<>();
-        list.add("Hindi");
-        list.add("Marathi");
-        map.insert("India", list);
-
-        System.out.println(map.get("India"));
+        HashMap<Integer, Integer> m = new HashMap<>();
+        m.insert(1, 1);
+        m.put(1, 2);
+        System.out.println(m.get(1));
     }
 
     private class Node {
@@ -211,7 +201,7 @@ public class HashMap<K, V> implements Map<K, V> {
         } else if (n.placeholder == true) {
             throw new IllegalArgumentException(); //node considered deleted if true
         }
-        n = new Node(k,v);
+        n.value = v;
     }
 
     /**

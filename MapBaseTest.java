@@ -9,8 +9,8 @@ import static org.junit.Assert.assertTrue;
 
 public abstract class MapBaseTest {
     private static Random rand = new Random();
-    public Map<Integer, LinkedList<String>> map;
-    protected abstract Map<Integer, LinkedList<String>> createMap();
+    public Map<Integer, Integer> map;
+    protected abstract Map<Integer, Integer> createMap();
 
     @Before
     public void setupMapTests() {
@@ -27,7 +27,7 @@ public abstract class MapBaseTest {
         for (Integer i = 0; i < 5; i++) {
             map.insert(i, i);
         }
-        assertEquals("0: 0\n1: 1\n2: 2\n3: 3\n4: 4", map.toString());
+        assertEquals("0: 0\n1: 1\n2: 2\n3: 3\n4: 4\n", map.toString());
         assertEquals(5, map.size());
     }
 
@@ -38,12 +38,12 @@ public abstract class MapBaseTest {
         map.insert(4, 4);
         map.insert(1, 1);
         map.insert(3, 3);
-        assertEquals("0: 0\n1: 1\n2: 2\n3: 3\n4: 4", map.toString());
+        assertEquals("0: 0\n1: 1\n2: 2\n3: 3\n4: 4\n", map.toString());
         assertEquals(5, map.size());
         map = this.createMap();
         map.insert(0, 0);
         map.insert(-2, -2);
-        assertEquals("-2: -2\n0: 0", map.toString());
+        assertEquals("0: 0\n-2: -2\n", map.toString());
     }
 
     @Test(expected = IllegalArgumentException.class)
