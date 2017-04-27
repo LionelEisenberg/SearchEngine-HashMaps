@@ -10,27 +10,30 @@ public final class HashMapBench {
     private HashMapBench() {}
 
         //insert helper method.
-        private static void insert(HashMapTwo<String, ArrayList<String>> m, String[] data, ArrayList<String> list) {
+        private static void insert(HashMap<Integer, ArrayList<String>> m, Integer[] data, ArrayList<String> list) {
             for (Integer i = 0; i < SIZE; i++) {
-                m.insert(data[i], list);
+                try {
+                    m.insert(data[i], list);
+                } catch (IllegalArgumentException e) {
+                }
             }
         }
 
         //remove helper method
-        private static void remove(HashMapTwo<String, ArrayList<String>> m, String[] data) {
+        private static void remove(HashMap<Integer, ArrayList<String>> m, Integer[] data) {
             for (Integer i = 0; i < SIZE; i++) {
                 m.remove(data[i]);
             }
         }
 
         //find helper method.
-        private static void lookup(HashMapTwo<String, ArrayList<String>> m, String[] data) {
+        private static void lookup(HashMap<Integer, ArrayList<String>> m, Integer[] data) {
             for (Integer i = 0; i < SIZE; i++) {
                 boolean x = m.has(data[i]);
             }
         }
 
-        private static void put(HashMapTwo<String, ArrayList<String>> m, String[] data, ArrayList<String> list) {
+        private static void put(HashMap<Integer, ArrayList<String>> m, Integer[] data, ArrayList<String> list) {
             for (Integer i = 0; i < SIZE; i++) {
                 m.put(data[i], list);
             }
@@ -56,10 +59,10 @@ public final class HashMapBench {
                 //Make an array of size 200 to benchmark
                 for(int i = 0; i < SIZE; i++) {
                     //data[i] = randomString(STRINGSIZE);
-                    data[i] = allPossible.charAt(random.nextInt(allPossible.length() - 1)) + "";
+                    data[i] = i;
                     list.add(data[i]);
                 }
-                HashMapTwo<String, ArrayList<String>> m = new HashMapTwo<String, ArrayList<String>>();
+                HashMap<Integer, ArrayList<String>> m = new HashMap<Integer, ArrayList<String>>();
                 b.start();
                 insert(m, data, list);
             }
@@ -74,10 +77,10 @@ public final class HashMapBench {
                 //Make an array of size 200 to benchmark
                 for(int i = 0; i < SIZE; i++) {
                     //data[i] = randomString(STRINGSIZE);
-                    data[i] = allPossible.charAt(random.nextInt(allPossible.length() - 1)) + "";
+                    data[i] = i;
                     list.add(data[i]);
                 }
-                HashMapTwo<String, ArrayList<String>> m = new HashMapTwo<String, ArrayList<String>>();
+                HashMap<String, ArrayList<String>> m = new HashMap<String, ArrayList<String>>();
                 insert(m, data, list);
                 b.start();
                 lookup(m, data);
@@ -94,7 +97,7 @@ public final class HashMapBench {
                     //data[i] = randomString(STRINGSIZE);
                     data[i] = allPossible.charAt(random.nextInt(allPossible.length() - 1)) + "";
                 }
-                HashMapTwo<String, ArrayList<String>> m = new HashMapTwo<String, ArrayList<String>>();
+                HashMap<String, ArrayList<String>> m = new HashMap<String, ArrayList<String>>();
                 b.start();
                 remove(m, data);
             }
@@ -112,7 +115,7 @@ public final class HashMapBench {
                     data[i] = allPossible.charAt(random.nextInt(allPossible.length() - 1)) + "";
                     list.add(data[i]);
                 }
-                HashMapTwo<String, ArrayList<String>> m = new HashMapTwo<String, ArrayList<String>>();
+                HashMap<String, ArrayList<String>> m = new HashMap<String, ArrayList<String>>();
                 insert(m, data, list);
                 b.start();
                 put(m, data, list);

@@ -15,18 +15,42 @@ import java.lang.reflect.Array;
 
 
 public class HashMap<K, V> implements Map<K, V> {
+    private static final double LOADFACTOR = 0.5;
+    private static final int DEFAULTSIZE = 131; //size is always prime
 
-    /*public static void main (String[] args) {
-        HashMap map = new HashMap();
-        System.out.println(map.size());
-        map.insert("USA", "English");
-        map.insert("France", "French");
-        map.insert("India", "Hindi");
-        map.insert("India", "Marathi");
-        System.out.println(map);
-    }*/
+    public static void main (String[] args) {
+        HashMap<String, ArrayList<String>> map = new HashMap<>(3);
+        //System.out.println(map.size());
+        ArrayList<String> list = new ArrayList<>();
+        list.add("English");
+        map.insert("USA", list);
+        list = new ArrayList<>();
+        list.add("French");
+        map.insert("France", list);
+        list = new ArrayList<>();
+        list.add("Hindi");
+        list.add("Marathi");
+        map.insert("India", list);
 
-    private LinkedList<V>[] chain;
+        System.out.println(map.get("India"));
+    }
+
+    private class Node {
+        K key;
+        V value;
+        boolean placeholder;
+        public Node(K k, V v) {
+            key = k;
+            value = v;
+            placeholder = false;
+        }
+
+        public String toString() {
+            return key + ": " + value;
+        }
+    }
+
+    private Node[] chain;
     private int size;  //refers to number of key-value pairs
 
     /**
@@ -35,7 +59,7 @@ public class HashMap<K, V> implements Map<K, V> {
 
     public HashMap () {
         this.size = 0;
-        this.chain = (LinkedList<V>[]) Array.newInstance(LinkedList.class, 10000); //default
+        this.chain = (Node[]) Array.newInstance(Node.class, DEFAULTSIZE); //default
     }
 
     /**
@@ -44,22 +68,38 @@ public class HashMap<K, V> implements Map<K, V> {
 
     public HashMap (int s) {
         this.size = 0;
-        this.chain = (LinkedList<V>[]) Array.newInstance(LinkedList.class, s); //user specified size
+        this.chain = (Node[]) Array.newInstance(Node.class, s); //user specified size
     }
 
     private int hashFunction(K k) {
-        return k.hashCode(); //returns hashcode
+        K key = k; //casts generic type to string
+        return key.hashCode(); //returns hashcode
     }
 
-    private LinkedList<V> find (K k) throws IllegalArgumentException {
+    private Node find (K k) throws IllegalArgumentException {
         if (k == null) {
             throw new IllegalArgumentException();
         }
         int hashCode = this.hashFunction(k);
-        int mod = (hashCode % this.chain.length + this.chain.length)
-            % this.chain.length;
-        LinkedList<V> values = this.chain[mod];
-        return values;
+        int mod = (hashCode % this.chain.length + this.chain.length) % this.chain.length;
+        int probeCount = 1; //keeps track of how far to probe
+        int index = 0; //keeps track of how many elements are searched
+        while (this.chain[mod] != null && index < this.chain.length) {
+            index++;
+            if (this.chain[mod].placeholder == true) { //skips over tombstone
+                continue;
+            }
+            if (this.chain[mod].key.equals(k)) { //checks for key
+                return this.chain[mod];
+            }
+            mod = (mod + this.probe(probeCount)) % this.chain.length; //moves on to next slot
+            probeCount++; // increment probing for next pass
+        }
+        return null;
+    }
+
+    private int probe(int n) {
+        return n*n; // probes quadratically
     }
 
     /**
@@ -67,23 +107,68 @@ public class HashMap<K, V> implements Map<K, V> {
      *
      * @param k The key.
      * @param v The value to be associated with k.
-     * @throws IllegalArgumentException If k is null.
+     * @throws IllegalArgumentException If k is null or k is mapped.
      */
 
     public void insert(K k, V v) throws IllegalArgumentException {
         if (k == null) {
             throw new IllegalArgumentException();
         }
+        if (this.has(k)) {
+            throw new IllegalArgumentException();
+        }
+        if (LOADFACTOR * this.chain.length <= this.size) {
+            this.resize();
+        }
         int hashCode = this.hashFunction(k);
         int mod = (hashCode % this.chain.length + this.chain.length)
-            % this.chain.length;
-        LinkedList<V> target = this.chain[mod];
-        if (target == null) {
-            this.chain[mod] = new LinkedList<V>();
-            target = this.chain[mod];
+                % this.chain.length;
+        int probeCount = 1; //keeps track of how far to probe
+        while (this.chain[mod] != null) {
+            if (this.chain[mod].placeholder == true) {
+                this.chain[mod] = new Node(k, v);//why no increase size here?
+                this.size++;
+                return;
+            }
+            mod = (mod + this.probe(probeCount)) % this.chain.length; //moves on to next slot
+            probeCount++;
         }
-        target.add(v);
+        this.chain[mod] = new Node(k, v);
         this.size++;
+    }
+
+    private void resize() {
+        int nextSize = getNextPrime(this.chain.length);
+        Node[] temp = (Node[]) Array.newInstance(Node.class, this.chain.length); //default
+        for (int i = 0; i < this.chain.length; i++) {
+            if (this.chain[i] != null && this.chain[i].placeholder == false) {
+                temp[i] = new Node(this.chain[i].key, this.chain[i].value);
+            }
+        }
+        this.chain = (Node[]) Array.newInstance(Node.class, nextSize);
+        this.size = 0;
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] != null) {
+                this.insert(temp[i].key, temp[i].value);
+            }
+        }
+    }
+
+    private int getNextPrime(int size) {
+        size = 2*size + 1;
+        int prime = 0;
+        for (int i = size; i < 2*size; i += 2) {
+            for (int j = 3; j < i/2; j += 2) {
+                if (i % j == 0) {
+                    prime = 1;
+                }
+            }
+            if (prime == 0) {
+                return i;
+            }
+            prime = 0;
+        }
+        return size;
     }
 
     /**
@@ -94,21 +179,18 @@ public class HashMap<K, V> implements Map<K, V> {
      * @throws IllegalArgumentException If k is null or not mapped.
      */
 
-    public String remove(K k) throws IllegalArgumentException {
-        LinkedList<V> values = this.find(k);
-        if (values == null) {
-            return "";
+    public V remove(K k) throws IllegalArgumentException {
+        if (k == null) {
+            throw new IllegalArgumentException();
         }
-        String output = "";
-        for (V s : values) {
-            output += s;
-            output += " ";
+        Node n = this.find(k); //gets node to remove
+        if (n == null) {
+            return null; // returns null if node is null
+        } else {
+            n.placeholder = true; //"deletes" by setting placeholder status
         }
-        int mod = (this.hashFunction(k) % this.chain.length + this.chain.length)
-            % this.chain.length;
-        this.chain[mod] = null; //removes it from map
         this.size--;
-        return output;
+        return n.value; //returns value of node that was "deleted"
     }
 
     /**
@@ -120,12 +202,16 @@ public class HashMap<K, V> implements Map<K, V> {
      */
 
     public void put(K k, V v) throws IllegalArgumentException {
-        LinkedList<V> values = this.find(k);
-        if (values == null) {
+        if (k == null) {
             throw new IllegalArgumentException();
         }
-        values.clear();
-        values.add(v);
+        Node n = this.find(k); //gets node to update
+        if (n == null) {
+            throw new IllegalArgumentException(); //node not mapped
+        } else if (n.placeholder == true) {
+            throw new IllegalArgumentException(); //node considered deleted if true
+        }
+        n = new Node(k,v);
     }
 
     /**
@@ -136,17 +222,17 @@ public class HashMap<K, V> implements Map<K, V> {
      * @throws IllegalArgumentException If k is null or not mapped.
      */
 
-    public String get(K k) throws IllegalArgumentException {
-        LinkedList<V> values = this.find(k);
-        String output = "";
-        if (values == null) {
-            return "";
+    public V get(K k) throws IllegalArgumentException {
+        if (k == null) {
+            throw new IllegalArgumentException();
         }
-        for (V v : values) {
-            output += v;
-            output += " ";
+        Node n = this.find(k);
+        if (n == null) {
+            throw new IllegalArgumentException(); //not mapped
+        } else if (n.placeholder == true) {
+            throw new IllegalArgumentException(); //not mapped (considered deleted)
         }
-        return output;
+        return n.value;
     }
 
     /**
@@ -157,15 +243,16 @@ public class HashMap<K, V> implements Map<K, V> {
      */
 
     public boolean has(K k) {
-        try {
-            LinkedList<K> values = this.find(k); //throws error if no match
-            if (values == null) {
-                return false;
-            }
-            return true;
-        } catch (IllegalArgumentException e) {
+        if (k == null) {
             return false;
         }
+        Node n = this.find(k);
+        if (n == null) {
+            return false; //not mapped
+        } else if (n.placeholder == true) { //considered deleted
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -189,7 +276,7 @@ public class HashMap<K, V> implements Map<K, V> {
         ArrayList<K> keys = new ArrayList<>();
         for (int i = 0; i < this.chain.length; i++) {
             if (this.chain[i] != null) {
-                keys.add(Integer.toString(i));
+                keys.add(this.chain[i].key);
             }
         }
         return keys.iterator();
@@ -204,7 +291,7 @@ public class HashMap<K, V> implements Map<K, V> {
          String out = "";
          for (int i = 0; i < this.chain.length; i++) {
              if (this.chain[i] != null) {
-                 out += i + ": " + this.chain[i] + "\n";
+                 out += this.chain[i].key + ": " + this.chain[i].value + "\n";
              }
          }
          return out;

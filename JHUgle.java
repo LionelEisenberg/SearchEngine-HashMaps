@@ -17,7 +17,7 @@ import java.lang.Exception;
 
 
 public class JHUgle {
-    private static HashMapTwo<String, ArrayList<String>> hashmap = new HashMapTwo<String, ArrayList<String>>();
+    private static HashMap<String, ArrayList<String>> hashmap = new HashMap<String, ArrayList<String>>();
 
     public static void main(String[] args) throws IOException {
         Scanner inFile;
@@ -59,7 +59,7 @@ public class JHUgle {
         GetInputQuery(hashmap);
     }
 
-    private static void GetInputQuery(HashMapTwo<String, ArrayList<String>> hashmap) {
+    private static void GetInputQuery(HashMap<String, ArrayList<String>> hashmap) {
         Scanner kb = new Scanner(System.in);
         Stack<ArrayList<String>> rpnStack = new Stack<>();
         System.out.print("> ");
@@ -69,7 +69,7 @@ public class JHUgle {
                 String next = nextLine[i];
 
                 if (next.compareTo("!") == 0) {
-                    break; //break out of loop and exit if the input is "!"
+                    return; //break out of loop and exit if the input is "!"
                 } else if (next.compareTo("&&") == 0) {
                     ArrayList<String> listV = new ArrayList<>();
                     String oredKeyToPopBack = "";
