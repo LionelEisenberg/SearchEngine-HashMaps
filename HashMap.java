@@ -8,11 +8,18 @@
  * HashMap implementation.
  */
 
-import java.util.LinkedList;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.lang.reflect.Array;
 
+/**
+ * This is an implementation of Map called HashMap. It uses a hash function
+ * to map key-value pairs to indices in an array. It employs open addressing
+ * and quadratic probing as a collision resolution policy.
+ * @param K
+ * @param V
+ */
 
 public class HashMap<K, V> implements Map<K, V> {
     private static final double LOADFACTOR = 0.5;
@@ -23,13 +30,13 @@ public class HashMap<K, V> implements Map<K, V> {
         V value;
         boolean placeholder;
         public Node(K k, V v) {
-            key = k;
-            value = v;
-            placeholder = false;
+            this.key = k;
+            this.value = v;
+            this.placeholder = false;
         }
 
         public String toString() {
-            return key + ": " + value;
+            return this.key + ": " + this.value;
         }
     }
 
@@ -280,4 +287,4 @@ public class HashMap<K, V> implements Map<K, V> {
         return out;
     }
 
- }
+}
