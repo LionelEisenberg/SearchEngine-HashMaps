@@ -17,8 +17,8 @@ import java.lang.reflect.Array;
  * This is an implementation of Map called HashMap. It uses a hash function
  * to map key-value pairs to indices in an array. It employs open addressing
  * and quadratic probing as a collision resolution policy.
- * @param K
- * @param V
+ * @param <K> Type for keys
+ * @param <V> Type for values
  */
 
 public class HashMap<K, V> implements Map<K, V> {
@@ -29,7 +29,8 @@ public class HashMap<K, V> implements Map<K, V> {
         K key;
         V value;
         boolean placeholder;
-        public Node(K k, V v) {
+
+        Node(K k, V v) {
             this.key = k;
             this.value = v;
             this.placeholder = false;
@@ -273,7 +274,7 @@ public class HashMap<K, V> implements Map<K, V> {
     }
 
     /**
-     * String representation of HashMap
+     * String representation of HashMap.
      * @return s string of hashedkey: value
      */
 
