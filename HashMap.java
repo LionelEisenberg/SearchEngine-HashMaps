@@ -8,11 +8,18 @@
  * HashMap implementation.
  */
 
-import java.util.LinkedList;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.lang.reflect.Array;
 
+/**
+ * This is an implementation of Map called HashMap. It uses a hash function
+ * to map key-value pairs to indices in an array. It employs open addressing
+ * and quadratic probing as a collision resolution policy.
+ * @param <K> Type for keys
+ * @param <V> Type for values
+ */
 
 public class HashMap<K, V> implements Map<K, V> {
     private static final double LOADFACTOR = 0.5;
@@ -22,14 +29,15 @@ public class HashMap<K, V> implements Map<K, V> {
         K key;
         V value;
         boolean placeholder;
-        public Node(K k, V v) {
-            key = k;
-            value = v;
-            placeholder = false;
+
+        Node(K k, V v) {
+            this.key = k;
+            this.value = v;
+            this.placeholder = false;
         }
 
         public String toString() {
-            return key + ": " + value;
+            return this.key + ": " + this.value;
         }
     }
 
@@ -82,7 +90,7 @@ public class HashMap<K, V> implements Map<K, V> {
     }
 
     private int probe(int n) {
-        return n*n; // probes quadratically
+        return n * n; // probes quadratically
     }
 
     /**
@@ -137,11 +145,11 @@ public class HashMap<K, V> implements Map<K, V> {
         }
     }
 
-    private int getNextPrime(int size) {
-        size = 2*size + 1;
+    private int getNextPrime(int s) {
+        s = 2 * s + 1;
         int prime = 0;
-        for (int i = size; i < 2*size; i += 2) {
-            for (int j = 3; j < i/2; j += 2) {
+        for (int i = s; i < 2 * s; i += 2) {
+            for (int j = 3; j < i / 2; j += 2) {
                 if (i % j == 0) {
                     prime = 1;
                 }
@@ -151,7 +159,7 @@ public class HashMap<K, V> implements Map<K, V> {
             }
             prime = 0;
         }
-        return size;
+        return s;
     }
 
     /**
@@ -191,7 +199,7 @@ public class HashMap<K, V> implements Map<K, V> {
         Node n = this.find(k); //gets node to update
         if (n == null) {
             throw new IllegalArgumentException(); //node not mapped
-        } else if (n.placeholder == true) {
+        } else if (n.placeholder) {
             throw new IllegalArgumentException(); //node considered deleted if true
         }
         n.value = v;
@@ -232,7 +240,7 @@ public class HashMap<K, V> implements Map<K, V> {
         Node n = this.find(k);
         if (n == null) {
             return false; //not mapped
-        } else if (n.placeholder == true) { //considered deleted
+        } else if (n.placeholder) { //considered deleted
             return false;
         }
         return true;
@@ -266,18 +274,18 @@ public class HashMap<K, V> implements Map<K, V> {
     }
 
     /**
-     * String representation of HashMap
+     * String representation of HashMap.
      * @return s string of hashedkey: value
      */
 
-     public String toString() {
-         String out = "";
-         for (int i = 0; i < this.chain.length; i++) {
-             if (this.chain[i] != null) {
-                 out += this.chain[i].key + ": " + this.chain[i].value + "\n";
-             }
-         }
-         return out;
-     }
+    public String toString() {
+        String out = "";
+        for (int i = 0; i < this.chain.length; i++) {
+            if (this.chain[i] != null) {
+                out += this.chain[i].key + ": " + this.chain[i].value + "\n";
+            }
+        }
+        return out;
+    }
 
- }
+}
