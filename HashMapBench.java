@@ -39,28 +39,17 @@ public final class HashMapBench {
             }
         }
 
-        //helper function to make a random string of length argument.
-        private static String randomString(int length) {
-            StringBuilder s = new StringBuilder(length);
-            for( int i = 0; i < SIZE; i++ ) {
-                s.append(allPossible.charAt(random.nextInt
-                (allPossible.length())));
-            }
-            return s.toString();
-        }
-
         // Now the benchmarks we actually want to run.
         @Bench
         public static void insert(Bee b) {
             for (int n = 0; n < b.reps(); n++) {
                 b.stop();
-                String[] data = new String[SIZE];
+                Integer[] data = new Integer[SIZE];
                 ArrayList<String> list = new ArrayList<String>();
                 //Make an array of size 200 to benchmark
                 for(int i = 0; i < SIZE; i++) {
-                    //data[i] = randomString(STRINGSIZE);
                     data[i] = i;
-                    list.add(data[i]);
+                    list.add("Easter Egg");
                 }
                 HashMap<Integer, ArrayList<String>> m = new HashMap<Integer, ArrayList<String>>();
                 b.start();
@@ -72,15 +61,14 @@ public final class HashMapBench {
         public static void lookup(Bee b) {
             for (int n = 0; n < b.reps(); n++) {
                 b.stop();
-                String[] data = new String[SIZE];
+                Integer[] data = new Integer[SIZE];
                 ArrayList<String> list = new ArrayList<String>();
                 //Make an array of size 200 to benchmark
                 for(int i = 0; i < SIZE; i++) {
-                    //data[i] = randomString(STRINGSIZE);
                     data[i] = i;
-                    list.add(data[i]);
+                    list.add("Easter Egg");
                 }
-                HashMap<String, ArrayList<String>> m = new HashMap<String, ArrayList<String>>();
+                HashMap<Integer, ArrayList<String>> m = new HashMap<Integer, ArrayList<String>>();
                 insert(m, data, list);
                 b.start();
                 lookup(m, data);
@@ -91,13 +79,12 @@ public final class HashMapBench {
         public static void remove(Bee b) {
             for (int n = 0; n < b.reps(); n++) {
                 b.stop();
-                String[] data = new String[SIZE];
+                Integer[] data = new Integer[SIZE];
                 //Make an array of size 200 to benchmark
                 for(int i = 0; i < SIZE; i++) {
-                    //data[i] = randomString(STRINGSIZE);
-                    data[i] = allPossible.charAt(random.nextInt(allPossible.length() - 1)) + "";
+                    data[i] = i;
                 }
-                HashMap<String, ArrayList<String>> m = new HashMap<String, ArrayList<String>>();
+                HashMap<Integer, ArrayList<String>> m = new HashMap<Integer, ArrayList<String>>();
                 b.start();
                 remove(m, data);
             }
@@ -107,15 +94,14 @@ public final class HashMapBench {
         public static void put(Bee b) {
             for (int n = 0; n < b.reps(); n++) {
                 b.stop();
-                String[] data = new String[SIZE];
+                Integer[] data = new Integer[SIZE];
                 ArrayList<String> list = new ArrayList<String>();
                 //Make an array of size 200 to benchmark
                 for(int i = 0; i < SIZE; i++) {
-                    //data[i] = randomString(STRINGSIZE);
-                    data[i] = allPossible.charAt(random.nextInt(allPossible.length() - 1)) + "";
-                    list.add(data[i]);
+                    data[i] = i;
+                    list.add("Easter Egg");
                 }
-                HashMap<String, ArrayList<String>> m = new HashMap<String, ArrayList<String>>();
+                HashMap<Integer, ArrayList<String>> m = new HashMap<Integer, ArrayList<String>>();
                 insert(m, data, list);
                 b.start();
                 put(m, data, list);
