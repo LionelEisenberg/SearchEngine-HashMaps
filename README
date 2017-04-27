@@ -1,23 +1,39 @@
-README for Assignment n#
+README for Assignment n# 9
 Lionel Eisenberg - leisenb5 - leisenb5@jhu.edu
+Sanat Deshpande - sdeshpa4 - sdeshpa4@jhu.edu
 600.226 Data Structures Spring 2017
-Partner:
+Partner: YES.
 
 ===============================================================================
 
 FILES: DIRECTORY AND FUNCTIONALITY:
 
+ - HashMap.java:  HashMap implementation of the Map interface. This
+                  implementation uses open addressing, more specifically
+                  double probing to implement the HashMap.
+ - HashMapBench.java: bench file for the HashMap. Feel free to change the size
+ - HashMapTest.java: Junit Test file for our HashMap implementation.
+ - HashMapV0: "Failed" HashMap implementation that used chainning.
+ - JHUgle.java: main file to run JHUgle.java.
+ - Map.java: Map interface.
+ - MapBaseTest.java: Base junit file for Maps.
+ - README: README for project
 
 ===============================================================================
 
 PROBLEMS TO SIGNAL:
 
+We do brut force the findNextPrime() method and we are sure there must be a more
+efficient way of calculating the next prime, however we saw that the time it
+took to resize really didnt affect our results that much.
+
+We looked at using the Sieve or Eratosthenes but again it seemed too extra
+for the scope of this project
 
 ===============================================================================
 
 EXTRA NOTES:
 
 
+
 ===============================================================================
-
-
