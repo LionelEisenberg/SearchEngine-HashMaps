@@ -271,13 +271,13 @@ public class HashMap<K, V> implements Map<K, V> {
      */
 
      public String toString() {
-         String out = "";
-         for (int i = 0; i < this.chain.length; i++) {
-             if (this.chain[i] != null) {
-                 out += this.chain[i].key + ": " + this.chain[i].value + "\n";
-             }
-         }
-         return out;
-     }
+        String out = "";
+        for (int i = 0; i < this.chain.length; i++) {
+            if (this.chain[i] != null) {
+                out += this.chain[i].key + ": " + this.chain[i].value + "\n";
+            }
+        }
+        return out;
+    }
 
  }
