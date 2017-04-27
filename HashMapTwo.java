@@ -16,7 +16,7 @@ import java.lang.reflect.Array;
 
 public class HashMapTwo<K, V> implements Map<K, V> {
     private static final double LOADFACTOR = 0.5;
-    private static final int DEFAULTSIZE = 131;
+    private static final int DEFAULTSIZE = 131; //size is always prime
 
     public static void main (String[] args) {
         HashMapTwo<String, ArrayList<String>> map = new HashMapTwo<>(3);
@@ -107,11 +107,14 @@ public class HashMapTwo<K, V> implements Map<K, V> {
      *
      * @param k The key.
      * @param v The value to be associated with k.
-     * @throws IllegalArgumentException If k is null.
+     * @throws IllegalArgumentException If k is null or k is mapped.
      */
 
     public void insert(K k, V v) throws IllegalArgumentException {
         if (k == null) {
+            throw new IllegalArgumentException();
+        }
+        if (this.has(k)) {
             throw new IllegalArgumentException();
         }
         if (LOADFACTOR * this.chain.length <= this.size) {

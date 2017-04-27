@@ -1,6 +1,6 @@
-public class AvlTreeMapTest extends MapBaseTest {
+public class HashMapTest extends MapBaseTest {
     @Override
-    protected Map<String, LinkedList<String>> createMap() {
-        return new HashMapTwo<String, LinkedList<String>>();
+    protected Map<Integer, Integer> createMap() {
+        return new HashMapTwo<Integer, Integer>();
     }
 }

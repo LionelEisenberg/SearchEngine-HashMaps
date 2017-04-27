@@ -27,7 +27,7 @@ public abstract class MapBaseTest {
         for (Integer i = 0; i < 5; i++) {
             map.insert(i, i);
         }
-        assertEquals("{0: 0, 1: 1, 2: 2, 3: 3, 4: 4}", map.toString());
+        assertEquals("0: 0\n1: 1\n2: 2\n3: 3\n4: 4", map.toString());
         assertEquals(5, map.size());
     }
 
@@ -38,12 +38,12 @@ public abstract class MapBaseTest {
         map.insert(4, 4);
         map.insert(1, 1);
         map.insert(3, 3);
-        assertEquals("{0: 0, 1: 1, 2: 2, 3: 3, 4: 4}", map.toString());
+        assertEquals("0: 0\n1: 1\n2: 2\n3: 3\n4: 4", map.toString());
         assertEquals(5, map.size());
         map = this.createMap();
         map.insert(0, 0);
         map.insert(-2, -2);
-        assertEquals("{-2: -2, 0: 0}", map.toString());
+        assertEquals("-2: -2\n0: 0", map.toString());
     }
 
     @Test(expected = IllegalArgumentException.class)
