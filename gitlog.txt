@@ -1,0 +1,334 @@
+commit 6c340db0a2515bc7ff7fbdc53a91545bc2a6e5ac
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Sun Apr 30 19:52:10 2017 -0400
+
+    README Update
+
+commit 7aa822f7bb031f9be84d1ad3fd45cd64c75e5469
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 23:11:39 2017 -0400
+
+    checkstyle
+
+commit b8327614dfd9c5d54d5bd14bd384e8b7dc4d36ad
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 23:10:22 2017 -0400
+
+    checkstyle
+
+commit b922f9ce859d76324aa5bc9dbb623d78adab52aa
+Merge: 4390a1a 250c3ba
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 23:07:25 2017 -0400
+
+    Merge branch 'master' of https://github.com/LionelEisenberg/SearchEngine-HashMaps
+
+commit 4390a1acf65c55f1a9ef0136fa28be5dd9f4ccf2
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 23:07:11 2017 -0400
+
+    checkstyle
+
+commit 250c3baec087919d0ed0e6b39ccafc51d1ef146e
+Merge: a4c295c e0ffa76
+Author: Student <lionel.eisenberg@gmail.com>
+Date:   Wed Apr 26 23:05:43 2017 -0400
+
+    Merge branch 'master' of https://github.com/LionelEisenberg/SearchEngine-HashMaps
+
+commit e0ffa76aba584e1695564129c119ac838b033413
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 23:04:56 2017 -0400
+
+    checkstyle
+
+commit a4c295c8e0739c6cb0f9470f012353fdbfc78c08
+Author: Student <lionel.eisenberg@gmail.com>
+Date:   Wed Apr 26 23:04:35 2017 -0400
+
+    Checkstyle for JHUgle.java
+
+commit a56be8ccb93fae9772408930888ad86fd4f32631
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 23:02:57 2017 -0400
+
+    checkstyle
+
+commit a1c6697d879a3789ccf51177f3a4acb6f59f5d44
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 23:01:32 2017 -0400
+
+    checkstyle
+
+commit aa289549738e9749adfaac6566af3fac8841fad8
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 22:59:29 2017 -0400
+
+    checkstyle
+
+commit 72d8309c4b5c8ce95a92f76f62f15cb83ee5d43a
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 22:55:30 2017 -0400
+
+    checkstyle
+
+commit 322d93667c83c229f426ba42151dde0594d43cef
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 22:54:23 2017 -0400
+
+    checkstyle
+
+commit 9923b4bb41cf470a41fc1a058e6cd2bacc4226dc
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Wed Apr 26 22:50:01 2017 -0400
+
+    added README comments
+
+commit 17edda0aeda539db907c215bec98bce59a9d76b4
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 22:37:45 2017 -0400
+
+    JUnit tests finished. Also, addressed minor problems with HashMap revealed in JUnit tests
+
+commit 096b5f35810c27a4c69e11f8cf8ed21a32eacc45
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Wed Apr 26 22:34:29 2017 -0400
+
+    very trivial changes to header from java.util.* to more individual ds
+
+commit 5d1a120ed8a1f616cfff6ab5d11b42251f6fe5bb
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 22:28:32 2017 -0400
+
+    Fixed minor bug in hashmap and in the process of writing J Unit tests
+
+commit b88a80643cc18f2ea284b77e8cf6e3ebd0fe2406
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Wed Apr 26 22:26:26 2017 -0400
+
+    changed bench file to insert interger, arraylist<string> key, value pair
+
+commit 3429f9ef3965ad348570b222a466733048a7c7c6
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Wed Apr 26 22:23:51 2017 -0400
+
+    general tweaks
+
+commit 5f9ef9a82e5a773a3f61dad747bab1a739f35e50
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 22:04:24 2017 -0400
+
+    Changes made to J UNit tests
+
+commit b37852e4668cf64a7031140c9417dd7d19812d91
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Wed Apr 26 21:50:21 2017 -0400
+
+    fixed bug in prime risizing
+
+commit 772e1fd1f646174dfb1bfce64d603ae6db652c12
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Wed Apr 26 21:45:26 2017 -0400
+
+    added prime resizing to hashmap
+
+commit 51595457cb782ff306036d2ce7d9274b309e6a5d
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 21:41:27 2017 -0400
+
+    Fixed bug with > character misprinting in the main user inteface
+
+commit 19b92fb9277c4c3743894afab5f6edccf237ff1a
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 21:38:06 2017 -0400
+
+    Reduced size of large string used for testing to speed up the rate at which the bench worked. NOTE this does not affect actual performance measured, just how fast the bench itself runs
+
+commit 760e89508bfba018a556a1db64cf7d8212cd7249
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Wed Apr 26 00:04:41 2017 -0400
+
+    Fixed bug relating to resizing map internally
+
+commit ac052ecbbe5c4e48a7da87993b470e605e329c0c
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Tue Apr 25 23:54:51 2017 -0400
+
+    implementation of resize function for hashmap. Tried doing prime numbers but seemed like it would be too expensive
+
+commit 0309fce3a1837c88d13cad420e42d38e37d46738
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Tue Apr 25 23:07:39 2017 -0400
+
+    bench changes
+
+commit 7a4a6e1b0a39df77995113c6a7af0bc9664c5520
+Author: Student <lionel.eisenberg@gmail.com>
+Date:   Tue Apr 25 22:51:32 2017 -0400
+
+    compilation error pushed
+
+commit bc1fc00450fcb7db2619c7da1c72833dcb34949d
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Tue Apr 25 22:49:28 2017 -0400
+
+    added bench to git
+
+commit e51b49940b816b0040b302996ddc07f4cc3dba01
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Tue Apr 25 22:48:21 2017 -0400
+
+    added bench to git
+
+commit 15716bcf2f9ebccb05d1c990ab16e2f870c42659
+Merge: 560dd37 9965af1
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Tue Apr 25 22:44:51 2017 -0400
+
+    Merge branch 'master' of https://github.com/LionelEisenberg/SearchEngine-HashMaps
+
+commit 9965af148a722a4da08d8cd3cfed1149f8dc1d27
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Tue Apr 25 22:44:25 2017 -0400
+
+    Deledted print statements used for debugging purposes
+
+commit 560dd37e9a2dd6555ec0f082b28b1e8251c0144c
+Merge: dd04760 25895d7
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Tue Apr 25 22:44:10 2017 -0400
+
+    Merge branch 'master' of https://github.com/LionelEisenberg/SearchEngine-HashMaps
+
+commit dd047608bb5780448c02710cfe7fdb992f1d66d6
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Tue Apr 25 22:44:04 2017 -0400
+
+    changes to benchmarking
+
+commit 25895d7774bb6e4450da8d8bf3fd72063fb8a0da
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Tue Apr 25 22:43:14 2017 -0400
+
+    Fixed issue with > character appearing incorrectly
+
+commit 1b41ec5154952d89fed06bb183d7caf57de120c9
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Tue Apr 25 22:37:45 2017 -0400
+
+    fix on commit
+
+commit b43da7c3589c2fe6840b6c973405174d0413c43d
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Tue Apr 25 22:36:16 2017 -0400
+
+    commited new files
+
+commit 5e75b975cd5672e741305f92a0b203c4bec4f9a9
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Tue Apr 25 17:48:31 2017 -0400
+
+    fixed bug where if we had the same keyword twice in the same line, it did not insert url twice
+
+commit 36653adcb29055495c33e1f294fc78b32453bee3
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Tue Apr 25 17:26:32 2017 -0400
+
+    syntax update on jhugle
+
+commit 3a225e81649935e5b4f71a7239d1cea434dceed8
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Tue Apr 25 17:13:59 2017 -0400
+
+    JHUgle now works with new  convoluted map
+
+commit 7d9ef2c98910c013b1041ed29a20c84a3111de17
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Tue Apr 25 17:03:41 2017 -0400
+
+    doing some work on jhugle to be complient with hashmap two
+
+commit dbf134c9cde3f9e6cff0183829778ff08b491b40
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Mon Apr 24 01:50:37 2017 -0400
+
+    changed benchmark to test second hashmap
+
+commit a26a8110934be3011f0841a7d4a9248fb9b8c0b2
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Sun Apr 23 21:50:31 2017 -0400
+
+    Fixed edge case
+
+commit eb16f1ddc2f1a91eca3476e70ff3ffde04e3cec6
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Sun Apr 23 21:45:28 2017 -0400
+
+    New hash map using closed hashing and quadratic probing
+
+commit e58f5aef27dd3cb7339898abc55d2c5281ea6ad3
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Sun Apr 23 14:14:05 2017 -0400
+
+    additional tweaks to jhugle and bench testing to HashMap
+
+commit 3baceb991be2338864435d40b986c9fa60da4c7b
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Sun Apr 23 13:45:57 2017 -0400
+
+    continuing tweeking of JHUgle, handled errors where stack is empty and cosmetic changes
+
+commit b7a7e36134eaa0dd759d7279c80fec6b613ea610
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Sun Apr 23 09:59:48 2017 -0400
+
+    implemented the || or in JHUgle.java. Moreover Fixed bug related to null values in the has function
+
+commit 4f976d776a61bd46007790060557f1525cfeeacf
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Sun Apr 23 00:42:54 2017 -0400
+
+    Finished some problem solving in JHUgle.java We are however still unsure about our && and || operators, but for hte time being we are leaving it as it is
+
+commit 2206c497a3154a0901f2d4c9bc095e0879d23d8e
+Merge: 7aecd52 a16b7cc
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Sun Apr 23 00:06:36 2017 -0400
+
+    Merge branch 'master' of https://github.com/LionelEisenberg/SearchEngine-HashMaps
+
+commit 7aecd52f421aa1a5d862f1d99660cbbbfd1be4a7
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Sun Apr 23 00:06:25 2017 -0400
+
+    Addressed several bugs relating to handling null values in HashMap
+
+commit a16b7ccfc77e1112736879e23b44e8191b748b21
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Sun Apr 23 00:02:35 2017 -0400
+
+    adding HashMapBench.java for testing
+
+commit 7665cb7f5b43a3989cf61b7f899b3f6c4b8b5676
+Author: Sanat Deshpande <sanatdeshpandejhu@gmail.com>
+Date:   Sat Apr 22 23:01:38 2017 -0400
+
+    Fleshed out HashMap. Uses open hashing and java string hash function for the time being
+
+commit 69054e308c4284f63ccb8345beef4b195af1dc33
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Sat Apr 22 22:24:13 2017 -0400
+
+    Finished up writing JHUgle.java
+
+commit 70663a15878ee3c46334b90f033bffb5fc7fb1e8
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Sat Apr 22 22:04:12 2017 -0400
+
+    Started writing JHUgle.java. Had to make the file work for any map for the moment while partner and I work on the HashMap using Chainning
+
+commit 182a5b7c28de4880540f686ec9e0d2ab9be6abf7
+Author: LionelEisenberg <lionel.eisenberg@gmail.com>
+Date:   Sat Apr 22 20:31:07 2017 -0400
+
+    initial commit get psyched
