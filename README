@@ -13,11 +13,12 @@ FILES: DIRECTORY AND FUNCTIONALITY:
                   double probing to implement the HashMap.
  - HashMapBench.java: bench file for the HashMap. Feel free to change the size
  - HashMapTest.java: Junit Test file for our HashMap implementation.
- - HashMapV0: "Failed" HashMap implementation that used chainning.
+ - HashMapV0: "Failed" HashMap implementation that used chaining.
  - JHUgle.java: main file to run JHUgle.java.
  - Map.java: Map interface.
  - MapBaseTest.java: Base junit file for Maps.
  - README: README for project
+ - gitlog.txt: Details who made what contribution
 
 ===============================================================================
 
@@ -32,8 +33,24 @@ for the scope of this project
 
 ===============================================================================
 
-EXTRA NOTES:
+OUR APPROACH:
 
+We had two overall iterations of our hashmap. One that used open hashing
+and one that used closed hashing. We decided that the open hashing approach
+using chaining as a collision resolution policy would be the easiest to start
+out with as a proof of concept. We implemented this using an array of
+LinkedLists, each of which grew whenever a key was hashed to the that slot in
+the array.
+After this approach, we tried a closed hashing implementation using quadratic
+probing. This was slightly trickier, but basically used an array of nodes
+that grew every time our load factor exceeded 50%. We also made sure that
+our array's size was always prime. This approach yielded much faster results
+than the previous approach.
+As for the JHUgle search engine, this was a fairly straightforward component
+that required reading in the data files and mapping each keyword to a URL,
+then properly parsing user instructions to search the table.
 
+Please see our gitlog.txt for further details on individual roles and
+contributions.
 
 ===============================================================================
