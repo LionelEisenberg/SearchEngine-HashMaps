@@ -123,7 +123,9 @@ public final class JHUgle {
                     try {
                         ArrayList<String> values = rpnStack.peek();
                         for (String value : values) {
-                            System.out.println(value);
+                            if (!value.equals("")) {
+                                System.out.println(value);
+                            }
                         }
                     } catch (EmptyStackException e) {
                         System.err.println("Stack is empty");
@@ -132,8 +134,9 @@ public final class JHUgle {
                     if (hashmap.has(next)) {
                         rpnStack.push(hashmap.get(next));
                     } else {
-                        System.out.println("Cannot Be found in database or this"
-                            + "command is not recognised, please try again.");
+                        ArrayList<String> empty = new ArrayList<>();
+                        empty.add("");
+                        rpnStack.push(empty);
                     }
                 }
             }
