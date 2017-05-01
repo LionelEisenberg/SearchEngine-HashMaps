@@ -123,7 +123,7 @@ public final class JHUgle {
                     try {
                         ArrayList<String> values = rpnStack.peek();
                         for (String value : values) {
-                            if (!value.equals("")) {
+                            if (!"".equals(value)) {
                                 System.out.println(value);
                             }
                         }
