@@ -7,7 +7,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
-public abstract class MapBaseTest {
+public abstract class MapTestBase {
     private static Random rand = new Random();
     public Map<Integer, Integer> map;
     protected abstract Map<Integer, Integer> createMap();
